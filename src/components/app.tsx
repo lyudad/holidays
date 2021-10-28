@@ -1,11 +1,9 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 
-const App: FC = () => {
-  return (
-    <main>
-      Hello, holiday App!
-    </main>
-  );
-};
+const App: FC = () => (
+  <main>
+    Hello, holiday App!
+  </main>
+);
 
 export default App;

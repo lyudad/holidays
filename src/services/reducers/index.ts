@@ -1,4 +1,4 @@
-import userReducer from "./user/userSlice";
+import userReducer from './user/userSlice';
 
 const reducer = {
   user: userReducer,

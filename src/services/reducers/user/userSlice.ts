@@ -1,3 +1,4 @@
+/* eslint no-param-reassign: "off" */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IUser } from '../../../utils/types';
 
@@ -15,7 +16,7 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    signIn: (state, action: PayloadAction<{user: IUser}>) => {
+    signIn: (state, action: PayloadAction<{ user: IUser }>) => {
       state.loggedIn = true;
       state.user = action.payload.user;
     },
