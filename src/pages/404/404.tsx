@@ -4,10 +4,13 @@ import { StyledSection, Message, Button } from './styles';
 
 const NotFoundPage: FC = () => {
   const history = useHistory();
+  const handleClick = () => {
+    history.goBack();
+  };
   return (
     <StyledSection>
       <Message> Здесь нет ничего... </Message>
-      <Button onClick={() => history.goBack()}>Назад</Button>
+      <Button onClick={handleClick}>Назад</Button>
     </StyledSection>
   );
 };
