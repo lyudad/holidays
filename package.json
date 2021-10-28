@@ -41,7 +41,8 @@
     },
     "rules": {
       "import/extensions": "off",
-      "import/no-absolute-path": "off"
+      "import/no-absolute-path": "off",
+      "react/jsx-props-no-spreading": "off"
     }
   },
   "browserslist": {

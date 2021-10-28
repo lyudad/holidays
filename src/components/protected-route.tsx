@@ -1,4 +1,3 @@
-/* eslint react/jsx-props-no-spreading: "off" */
 import React, { FC } from 'react';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
 import { useAppSelector } from 'utils/hooks';
