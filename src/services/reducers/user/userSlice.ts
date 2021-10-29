@@ -1,6 +1,6 @@
 /* eslint no-param-reassign: "off" */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IUser } from '../../../utils/types';
+import { IUser } from 'utils/types';
 
 interface TUserState {
   readonly loggedIn: boolean;
