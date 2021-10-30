@@ -1,4 +1,4 @@
-import { IUser } from "utils/types";
+import { IUser } from 'utils/types';
 
 export const mockSuperAdmin: IUser = {
   _id: '231857rruejfwoacrj93847',

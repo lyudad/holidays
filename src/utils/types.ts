@@ -7,16 +7,16 @@ export interface IUser {
 }
 
 export interface IPermissionsSet {
-  canDeclineDaysOff: boolean;
-  canApproveDaysOff: boolean;
-  canEditOwnDaysOff: boolean;
-  canEditEmployeesDaysOff: boolean;
-  canSeeDashboard: boolean;
-  canSeeUsersList: boolean;
-  canCreateUser: boolean;
-  canModifyUser: boolean;
-  canDeleteUser: boolean;
-  canSendPassword: boolean;
-  canBlockUser: boolean;
-  canUnblockUser: boolean;
+  readonly canDeclineDaysOff?: boolean;
+  readonly canApproveDaysOff?: boolean;
+  readonly canEditOwnDaysOff?: boolean;
+  readonly canEditEmployeesDaysOff?: boolean;
+  readonly canSeeDashboard?: boolean;
+  readonly canSeeUsersList?: boolean;
+  readonly canCreateUser?: boolean;
+  readonly canModifyUser?: boolean;
+  readonly canDeleteUser?: boolean;
+  readonly canSendPassword?: boolean;
+  readonly canBlockUser?: boolean;
+  readonly canUnblockUser?: boolean;
 }
