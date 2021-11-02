@@ -1,7 +1,8 @@
-import {
-  Form, Input, Button,
-} from 'antd';
+/* eslint-disable import/prefer-default-export */
+import { Form, Button } from 'antd';
 import React, { FC } from 'react';
+import 'antd/dist/antd.css';
+import { StyledForm, StyledInput } from './styles';
 
 const Auth: FC = () => {
   const onFinish = () => {
@@ -13,7 +14,7 @@ const Auth: FC = () => {
   };
 
   return (
-    <Form
+    <StyledForm
       name="basic"
       labelCol={{
         span: 8,
@@ -29,20 +30,18 @@ const Auth: FC = () => {
       autoComplete="off"
     >
       <Form.Item
-        label="Username"
-        name="username"
+        name="login"
         rules={[
           {
             required: true,
-            message: 'Please input your username!',
+            message: 'Please input your login!',
           },
         ]}
       >
-        <Input />
+        <StyledInput placeholder="login" />
       </Form.Item>
 
       <Form.Item
-        label="Password"
         name="password"
         rules={[
           {
@@ -51,7 +50,7 @@ const Auth: FC = () => {
           },
         ]}
       >
-        <Input.Password />
+        <StyledInput placeholder="password" />
       </Form.Item>
 
       <Form.Item
@@ -64,8 +63,7 @@ const Auth: FC = () => {
           Sign in
         </Button>
       </Form.Item>
-    </Form>
+    </StyledForm>
   );
 };
-
 export default Auth;
