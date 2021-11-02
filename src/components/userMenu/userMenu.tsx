@@ -19,7 +19,7 @@ import { IUser } from '../../utils/types';
 const user: IUser = {
   _id: 'qwe',
   name: 'string',
-  role: 'admin',
+  role: 'superAdmin',
 };
 
 function UserMenu() {
@@ -27,7 +27,7 @@ function UserMenu() {
   return (
     <Maine>
       <Menu>
-        { (role === 'super') && <Menu.Item key="Dashboard"> Dashboard </Menu.Item> }
+        { (role === 'superAdmin') && <Menu.Item key="Dashboard"> Dashboard </Menu.Item> }
         { role === 'employee'
           ? <Menu.Item key="Profile">Profile</Menu.Item>
           : <Menu.Item key="Users">Users</Menu.Item>}
