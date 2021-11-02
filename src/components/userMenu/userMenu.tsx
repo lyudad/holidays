@@ -1,8 +1,7 @@
 import React from 'react';
 import { Menu } from 'antd';
-import Maine, { StyledWraper } from './styles';
-
-import { IUser } from '../../utils/types';
+import { StyledMenu, StyledWraper } from 'components/userMenu/styles';
+import LANG from 'language/en';
 
 // interface Props {
 //   function: (role:string) => void;
@@ -14,29 +13,32 @@ import { IUser } from '../../utils/types';
 // по роли добавить рендер разделов меню: Dashboard - только для super,
 // Profile - employee, User - super+ admin
 // добавить обработчик на клик по кнопке, который будет переводить на соответствующие страницы ;
-
 // времено добавленный пользователь
-const user: IUser = {
+const user = {
   _id: 'qwe',
   name: 'string',
-  role: 'admin',
+  role: 'superAdmin',
 };
 
 function UserMenu() {
   const { role } = user;
   return (
-    <Maine>
+    <StyledMenu>
       <Menu>
-        { (role === 'super') && <Menu.Item key="Dashboard"> Dashboard </Menu.Item> }
-        { role === 'employee'
-          ? <Menu.Item key="Profile">Profile</Menu.Item>
-          : <Menu.Item key="Users">Users</Menu.Item>}
-        <Menu.Item key="Logout">Logout</Menu.Item>
+        {(role === `${LANG.super}` && (
+        <Menu.Item key={LANG.dashboard}>
+          {LANG.dashboard}
+        </Menu.Item>
+        ))}
+        { role === `${LANG.user}`
+          ? <Menu.Item key={LANG.profile}>{LANG.profile}</Menu.Item>
+          : <Menu.Item key={LANG.users}>{LANG.users}</Menu.Item>}
+        <Menu.Item key={LANG.logout}>{LANG.logout}</Menu.Item>
       </Menu>
       <StyledWraper>
         <h1> Тут будет полезный контент </h1>
       </StyledWraper>
-    </Maine>
+    </StyledMenu>
   );
 }
 export default UserMenu;

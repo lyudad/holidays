@@ -1,7 +1,7 @@
-import React from 'react';
+// import React from 'react';
 import styled from 'styled-components';
 
-const StyledMaine = styled.main`
+export const StyledMenu = styled.main`
 width:100%;
 max-width: 1440px;
 display:flex;
@@ -9,12 +9,10 @@ display:flex;
 
 export const StyledWraper = styled.div`
 width:80%;
+margin-left: 20px;
 `;
 
-export default function Maine({ children }:any) {
-  return (
-    <StyledMaine>
-      {children}
-    </StyledMaine>
-  );
-}
+export default {
+  StyledMenu,
+  StyledWraper,
+};
