@@ -23,8 +23,12 @@ const UsersPage: FC = () => (
     <ContentWrap>
       <StyledTable
         bordered
+        rowKey={(record: any) => record.key}
         dataSource={mockUserPageTableData}
         columns={mockUserPageTableColumns}
+        pagination={{
+          hideOnSinglePage: true,
+        }}
       />
     </ContentWrap>
   </StyledMain>

@@ -22,9 +22,6 @@ export const gap = css`
 export const buttonBorder = css`
   border: 1px solid #1c1c1c;
 `;
-export const tableBordersColor = css`
-  border-bottom-color: #1c1c1c;
-  border-top-color: #1c1c1c;
-  border-left-color: #1c1c1c;
-  border-right-color: #1c1c1c;
+export const tableBorders = css`
+  border: #1c1c1c solid 1px;
 `;

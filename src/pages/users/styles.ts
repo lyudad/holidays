@@ -4,7 +4,7 @@ import {
   colorPrimaryText,
   gap,
   buttonBorder,
-  tableBordersColor,
+  tableBorders,
 } from 'utils/css-constants';
 
 export const StyledMain = styled.main`
@@ -33,10 +33,5 @@ export const ContentWrap = styled.div`
 `;
 
 export const StyledTable = styled(Table)`
-  &.thead {
-    background-color: salmon;
-  }
-  & tr, td {
-    ${tableBordersColor}
-  }
+  ${tableBorders}
 `;

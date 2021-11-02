@@ -16,7 +16,7 @@ export const mockUserPageTableColumns: any[] = [
     width: '25%',
     dataIndex: 'manageDaysOffAction',
     render: (action: any) => (
-      <ActionButton block type="text" size="middle" onClick={action}>Edit</ActionButton>
+      <ActionButton type="text" size="middle" onClick={action}>Edit</ActionButton>
     ),
   },
   {
@@ -24,7 +24,7 @@ export const mockUserPageTableColumns: any[] = [
     width: '25%',
     dataIndex: 'manageUserAction',
     render: (action: any) => (
-      <ActionButton block type="text" size="middle" onClick={action}>Delete</ActionButton>
+      <ActionButton type="text" size="middle" onClick={action}>Delete</ActionButton>
     ),
   },
 ];
