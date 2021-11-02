@@ -10,12 +10,12 @@ type HolidayType = {
 
 type InitialStateType = {
   holidays: HolidayType[];
-  leafes_sick: HolidayType[];
+  sick_leave: HolidayType[];
 }
 
 const initialState = {
   holidays: [],
-   leafes_sick: [], 
+   sick_leave: [], 
 }
 
 const AppContext = createContext<InitialStateType>(initialState);
@@ -36,7 +36,7 @@ export const userDatePicker = (state, action: PayloadAction<{ user: IUser }>) =>
       ]
        case 'CHOOSE_LEAFES_SICK':
       return [
-         ...state.filter(leafes_sick => holidays.id !== action.payload.id),
+         ...state.filter(sick_leave => holidays.id !== action.payload.id),
       ]
       default:
       return state;

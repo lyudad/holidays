@@ -1,9 +1,10 @@
 import { DatePicker, Space } from 'antd';
-
+import s from "./DatePicker.module.css";
 const { RangePicker } = DatePicker;
 
-ReactDOM.render(
-  <Space direction="vertical" size={12}>
+const Calendar =() => {
+    return (
+  <Space className="Space_Date" direction="vertical" size={12}>
     <RangePicker />
     <RangePicker showTime />
     <RangePicker picker="week" />
@@ -13,4 +14,4 @@ ReactDOM.render(
   mountNode,
 );
 
-export default RangePicker;
+export default Calendar;

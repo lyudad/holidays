@@ -2,8 +2,8 @@ import { Cascader } from 'antd';
 
 const options = [
   {
-    value: 'zhejiang',
-    label: 'Zhejiang',
+    value: 'vacation',
+    label: 'vacation',
     children: [
       {
         value: 'hangzhou',
@@ -18,8 +18,8 @@ const options = [
     ],
   },
   {
-    value: 'jiangsu',
-    label: 'Jiangsu',
+    value: 'sick_leave',
+    label: 'sick_leave',
     children: [
       {
         value: 'nanjing',
@@ -39,9 +39,9 @@ function onChange(value) {
   console.log(value);
 }
 
-const DateCascader =() => {
+const DateCascader = () => {
     return (
-  <Cascader options={options} onChange={onChange} placeholder="Please select" />,
+  <Cascader className="DateCascader" options={options} onChange={onChange} placeholder="Please select" />,
   mountNode,
 );
 
