@@ -3,6 +3,7 @@ import { Form, Button } from 'antd';
 import React, { FC } from 'react';
 import 'antd/dist/antd.css';
 import { StyledForm, StyledInput } from './styles';
+import { INPUT_MESSAGE } from './const';
 
 const Auth: FC = () => {
   const onFinish = () => {
@@ -34,7 +35,7 @@ const Auth: FC = () => {
         rules={[
           {
             required: true,
-            message: 'Please input your login!',
+            message: INPUT_MESSAGE.login,
           },
         ]}
       >
@@ -46,7 +47,7 @@ const Auth: FC = () => {
         rules={[
           {
             required: true,
-            message: 'Please input your password!',
+            message: INPUT_MESSAGE.password,
           },
         ]}
       >
