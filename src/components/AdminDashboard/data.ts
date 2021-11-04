@@ -1,10 +1,12 @@
-export const dataSource: readonly
-{
-  key: String,
-  user: String,
-  dates: String,
-  types: String,
-  actions: String,
+export interface dataSource = {
+    [
+
+        key: String,
+        user: String,
+        dates: String,
+        types: String,
+        actions: String,
+    ]
 };
 //   {
 //     key: '2',
