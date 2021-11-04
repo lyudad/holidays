@@ -1,23 +1,16 @@
-import { FC } from 'react';
-import { Table, Row, Col } from 'antd';
-// import { Table} from './styles';
+// import { FC } from 'react';
+import { Table } from 'antd';
+import { dashTable } from './styles';
+import { dataSource } from './data';
 
-const dataSource = [
-  {
-    key: '1',
-    user: 'Mike',
-    dates: '04/11/21',
-    types: 'vacation',
-    actions: 'approve',
-  },
+const data = [
   {
     key: '2',
-    name: 'John',
+    user: 'John',
     dates: '05/11/21',
     types: 'vacation',
     actions: 'approve',
-  },
-];
+  }];
 
 const columns = [
   {
@@ -42,12 +35,10 @@ const columns = [
   },
 ];
 
-const Dash: FC = () => (
-  <Row>
-    <Col>
-      <Table columns={columns} dataSource={dataSource} />
-    </Col>
-  </Row>
-);
+const Dash = () => (
+  <div className="dashTable">
+    <Table columns={columns} dataSource={data} />
+  </div>
 
+);
 export default Dash;
