@@ -1,44 +1,49 @@
 import React from 'react';
 import { Menu } from 'antd';
-import { StyledMenu, StyledWraper } from 'components/userMenu/styles';
-import LANG from 'language/en';
+import { StyledContainer, StyledSection } from 'components/userMenu/styles';
+import {
+  dashboard, profile, users, logout,
+} from 'components/userMenu/constants';
+import { IUser } from 'utils/types';
 
-// interface Props {
-//   function: (role:string) => void;
-// }
-
-// по id в базе будет поиск пользователя и его роли, для рендора соответствующих кнопок меню
-// const user: IUser = UserModel.findOne(id);
-// const { role } = user;
-// по роли добавить рендер разделов меню: Dashboard - только для super,
-// Profile - employee, User - super+ admin
 // добавить обработчик на клик по кнопке, который будет переводить на соответствующие страницы ;
 // времено добавленный пользователь
-const user = {
-  _id: 'qwe',
-  name: 'string',
-  role: 'superAdmin',
+// const user: IUser  = {
+//   _id: 'qwe',
+//   name: 'string',
+//   role: 'superAdmin',
+// };
+
+// получаем роль у user  нам нужна именно роль, а не доступы
+
+const getUserRole = (user: IUser) => {
+  if (!user.role) {
+    return 'none';
+  }
+  return user.role;
 };
 
-function UserMenu() {
-  const { role } = user;
+function UserMenu(user: IUser) {
+  const MenuOptions = {
+    superAdmin: [dashboard, users, logout],
+    hrAdmin: [users, logout],
+    employee: [profile, logout],
+  };
+  const role = getUserRole(user);
+
   return (
-    <StyledMenu>
+    <StyledContainer>
       <Menu>
-        {(role === `${LANG.super}` && (
-        <Menu.Item key={LANG.dashboard}>
-          {LANG.dashboard}
-        </Menu.Item>
+        {MenuOptions[role].map((el) => (
+          <Menu.Item key={el}>
+            {el}
+          </Menu.Item>
         ))}
-        { role === `${LANG.user}`
-          ? <Menu.Item key={LANG.profile}>{LANG.profile}</Menu.Item>
-          : <Menu.Item key={LANG.users}>{LANG.users}</Menu.Item>}
-        <Menu.Item key={LANG.logout}>{LANG.logout}</Menu.Item>
       </Menu>
-      <StyledWraper>
+      <StyledSection>
         <h1> Тут будет полезный контент </h1>
-      </StyledWraper>
-    </StyledMenu>
+      </StyledSection>
+    </StyledContainer>
   );
 }
 export default UserMenu;
