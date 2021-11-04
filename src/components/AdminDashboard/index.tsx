@@ -1,14 +1,14 @@
 import React from 'react';
 import { Table } from 'antd';
-import dashTable from './styles';
+// import { dashTable } from './styles';
 // import { dataSource } from './data';
 
 type Props = {};
 
-const Dash: React.FunctionComponent<Props> = () => {
+const DashTable: React.FunctionComponent<Props> = () => {
   const dataSource = [
     {
-      key: '2',
+      key: '1',
       user: 'John',
       dates: '05/11/21',
       types: 'vacation',
@@ -16,14 +16,14 @@ const Dash: React.FunctionComponent<Props> = () => {
     },
     {
       key: '2',
-      user: 'John',
+      user: 'Bill',
       dates: '05/11/21',
       types: 'vacation',
       actions: 'approve',
     },
     {
-      key: '2',
-      user: 'John',
+      key: '3',
+      user: 'Jack',
       dates: '05/11/21',
       types: 'vacation',
       actions: 'approve',
@@ -53,11 +53,11 @@ const Dash: React.FunctionComponent<Props> = () => {
   ];
 
   return (
-    <div className={dashTable}>
+    <div className="dashTable">
       <Table columns={columns} dataSource={dataSource} />
     </div>
 
   );
 };
 
-export default Dash;
+export default DashTable;
