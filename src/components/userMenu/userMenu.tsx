@@ -1,9 +1,7 @@
 import React from 'react';
 import { Menu } from 'antd';
 import { StyledContainer, StyledSection } from 'components/userMenu/styles';
-// import {
-//   dashboard, profile, users, logout,
-// } from 'components/userMenu/constants';
+import { superAdmin, hrAdmin, employee } from 'components/userMenu/constants';
 import LANG from 'language/en';
 import { IUser } from 'utils/types';
 
@@ -24,7 +22,6 @@ function UserMenu(user: IUser) {
     superAdmin: [LANG.dashboard, LANG.users, LANG.logout],
     hrAdmin: [LANG.users, LANG.logout],
     employee: [LANG.profile, LANG.logout],
-    'No role': [],
   };
   const role = getUserRole(user);
 
