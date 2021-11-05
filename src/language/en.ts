@@ -1,5 +1,5 @@
 const LANG = {
-  super: 'superAdmin',
+  superAdmin: 'superAdmin',
   user: 'employee',
   admin: 'hrAdmin',
   dashboard: 'Dashboard',

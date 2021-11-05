@@ -1,17 +1,10 @@
 import React from 'react';
 import { Menu } from 'antd';
 import { StyledContainer, StyledSection } from 'components/userMenu/styles';
-import { superAdmin, hrAdmin, employee } from 'components/userMenu/constants';
 import LANG from 'language/en';
 import { IUser } from 'utils/types';
 
 // добавить обработчик на клик по кнопке, который будет переводить на соответствующие страницы ;
-// времено добавленный пользователь
-// const user: IUser = {
-//   _id: 'qwe',
-//   name: 'string',
-//   role: 'superAdmin',
-// };
 
 // получаем роль у user  нам нужна именно роль, а не доступы
 
