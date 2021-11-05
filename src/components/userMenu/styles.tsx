@@ -1,20 +1,17 @@
 import styled from 'styled-components';
-import React from 'react';
 
-const StyledMaine = styled.main`
-width:100%;
-max-width: 1440px;
-display:flex;
-`;
-
-export const StyledWraper = styled.div`
+export const StyledSection = styled.section`
 width:80%;
+display: flex;
+margin-left: 20px;
 `;
 
-export default function Maine({ children }:any) {
-  return (
-    <StyledMaine>
-      {children}
-    </StyledMaine>
-  );
-}
+export const StyledContainer = styled.div`
+display: flex;
+width:100%;
+`;
+
+export default {
+  StyledContainer,
+  StyledSection,
+};
