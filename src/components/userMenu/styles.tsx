@@ -9,6 +9,7 @@ margin-left: 20px;
 export const StyledContainer = styled.div`
 display: flex;
 width:100%;
+margin-right: 20px;
 `;
 
 export default {

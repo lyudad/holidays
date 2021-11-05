@@ -1,6 +1,6 @@
 import React from 'react';
 import { Menu } from 'antd';
-import { StyledContainer, StyledSection } from 'components/userMenu/styles';
+import { StyledContainer } from 'components/userMenu/styles';
 import LANG from 'language/en';
 import { IUser } from 'utils/types';
 
@@ -17,19 +17,18 @@ function UserMenu(user: IUser) {
     employee: [LANG.profile, LANG.logout],
   };
   const role = getUserRole(user);
-
+  const handleClick = (e: React.HTMLProps<HTMLButtonElement>) => {
+    console.log('click ', e);
+  };
   return (
     <StyledContainer>
       <Menu>
         { MenuOptions[role].map((el: string) => (
-          <Menu.Item key={el}>
+          <Menu.Item key={el} onClick={handleClick}>
             {el}
           </Menu.Item>
         ))}
       </Menu>
-      <StyledSection>
-        <h1> Тут будет полезный контент </h1>
-      </StyledSection>
     </StyledContainer>
   );
 }

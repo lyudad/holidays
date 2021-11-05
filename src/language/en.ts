@@ -1,7 +1,4 @@
 const LANG = {
-  superAdmin: 'superAdmin',
-  user: 'employee',
-  admin: 'hrAdmin',
   dashboard: 'Dashboard',
   profile: 'Profile',
   users: 'Users',
