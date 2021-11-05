@@ -5,7 +5,7 @@ import 'antd/dist/antd.css';
 
 const { RangePicker } = DatePicker;
 
-const DateCalendar = () => (
+const DateCalendar: FC = () => (
   <>
     <RangePicker />
     {/* <RangePicker showTime />
