@@ -1,3 +1,5 @@
+/* eslint-disable import/no-named-as-default-member */
+/* eslint-disable import/no-named-as-default */
 import { NotFoundPage, HomePage, Calendar } from 'pages';
 import React, { FC } from 'react';
 import {
@@ -10,7 +12,7 @@ const App: FC = () => (
       <Route path="/" exact render={() => <HomePage />} />
       {/* <Route path="login" exact render={() => <LoginPage />} /> */}
       {/* <ProtectedRoute path="/profile" exact children={<ProfileEditPage />} /> */}
-       <ProtectedRoute path={routes.calendar} render={() => <Calendar />}> </ProtectedRoute>
+      <Route path="/calendar" render={() => <Calendar />}> </Route>
       <Route path="*" render={() => <NotFoundPage />} />
     </Switch>
   </>

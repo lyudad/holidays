@@ -1,11 +1,10 @@
 import React, { FC } from 'react';
-import { Container} from './styles';
-// import { DatePicker} from './components/DatePicker';
+import DateCalendar from 'components/Calendar';
 
 const Calendar: FC = () => (
-  <Container>
-    <DatePicker />
-  </Container>
+  <>
+    <DateCalendar />
+  </>
 );
 
 export default Calendar;
