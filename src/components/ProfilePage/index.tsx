@@ -31,24 +31,12 @@ import { StyledWraper, StyledSpan, StyledButton } from 'components/ProfilePage/s
 // interface State {
 //   text: string;
 // }
+// const namePlh = LANG['first-name'];
 
 function ProfilePage() {
   // const { colums }: IColums = TableTest.colums;
   // const { data } = TableTest;
-  const [firstName, setName] = useState('');
-  const [SecondName, setSecondName] = useState('');
-  const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const { name, value } = e.currentTarget;
-    switch (name) {
-      case firstName:
-        setName(value);
-        break;
-      case SecondName:
-        setSecondName(value);
-        break;
-      default:
-    }
-  };
+
   // временные заглушки
   const sickDays = 1;
   const vacationDays = 1;
@@ -57,18 +45,16 @@ function ProfilePage() {
       <section>
         <StyledWraper>
           <InputComponent
-            name="firstName"
-            type="text"
+
             onChange={handleInputChange}
-            value={firstName}
-            plaseholder={LANG['first-name']}
+
           />
           <InputComponent
             name="SecondName"
+            plaseholder={LANG.lastName}
             type="text"
             value={SecondName}
             onChange={handleInputChange}
-            plaseholder={LANG['last-name']}
           />
         </StyledWraper>
         <StyledWraper>

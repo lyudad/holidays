@@ -7,7 +7,7 @@ const LANG = {
   users: 'Users',
   logout: 'Logout',
   'first-name': 'first name',
-  'last-name': 'last name',
+  lastName: 'last name',
 };
 
 export default LANG;
