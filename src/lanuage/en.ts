@@ -8,6 +8,8 @@ const LANG = {
   logout: 'Logout',
   'first-name': 'first name',
   'last-name': 'last name',
+  sickLeave: 'sick leave',
+  vacationDay: 'vacation day(s)',
 };
 
 export default LANG;

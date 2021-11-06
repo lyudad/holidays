@@ -1,33 +1,33 @@
 import React from 'react';
 import { Table } from 'antd';
+import CONST from 'components/Table/constants';
 
 type Props = {};
 
 const TableComponent:React.FunctionComponent<Props> = () => {
-  // const { data, columns } = TableTest;
   const columnsIncome = [
     {
-      title: 'Month',
+      title: CONST.month,
       dataIndex: 'month',
       key: 'month',
     },
     {
-      title: 'Dates',
+      title: CONST.datas,
       dataIndex: 'dates',
       key: 'dates',
     },
     {
-      title: 'Status',
+      title: CONST.status,
       dataIndex: 'status',
       key: 'status',
     },
     {
-      title: 'Type',
+      title: CONST.type,
       key: 'type',
       dataIndex: 'type',
     },
   ];
-  const data = [{
+  const dataIncome = [{
     key: '1',
     month: 'June 2020',
     dates: '10-20',
@@ -50,7 +50,7 @@ const TableComponent:React.FunctionComponent<Props> = () => {
   }];
   return (
     <>
-      <Table columns={columnsIncome} dataSource={data} />
+      <Table columns={columnsIncome} dataSource={dataIncome} />
     </>
   );
 };
