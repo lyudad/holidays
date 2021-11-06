@@ -1,15 +1,16 @@
 import { NotFoundPage, HomePage } from 'pages';
 import ProfilePage from 'pages/userpage/ProfilePage';
+import UsersPage from 'pages/users';
 import React, { FC } from 'react';
 import {
   Switch, Route,
 } from 'react-router-dom';
-// import UserMenu from './userMenu';
 
 const App: FC = () => (
   <>
     <Switch>
       <Route path="/" exact render={() => <HomePage />} />
+      <Route path="/users" exact render={() => <UsersPage />} />
       {/* <Route path="login" exact render={() => <LoginPage />} /> */}
       {/* <ProtectedRoute path="/profile" exact children={<ProfileEditPage />} /> */}
       <Route path="/userpage" exact render={() => <ProfilePage />} />

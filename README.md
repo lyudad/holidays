@@ -21,6 +21,28 @@ npm run lint-fix // lint and auto-fix(if possible) all js/ts files
 6. Now modules can be imported by absolute paths from root `/src`
 7. Created HOC (HigherOrderComponent) for futer protected by auth routes
 
+## *PR#2 29/10/21 Create user roles / Alex Kurkov*
+Whats's new:
+1. created Roles constants with permissions sets in `src/utils/constants.ts`
+2. users permission can be checked with helper exported from `src/utils/common.ts`:
+```
+hasPermission(user: { role: string, ...user }, permission: string) :boolean 
+```
+
+## *PR#5 02/11/21 add Storybook / Alex Kurkov*
+Whats's new:
+1. add sb to projects packages
+2. created template *Action button* component with decorated and argumented stories
+open storybook in dev-mode by running script  
+```
+npm run storybook
+```
+## *PR#8 04/11/21 UsersPage layout / Alex Kurkov*
+Whats's new:
+1. created UsersPage layout with ant-design <Table> component. [Read UI-kit docs referring to Table here](https://ant.design/components/table/)
+2. The data used is at the moment the mock-data from `src/utils/mocks/mock-user-page-table-data.tsx`
+3. The page is available at '/users' route
+
 ## **Рабочий процесс**
 
 ## *PR#1 28/10/21 Начальное разворачивание проекта / Alex Kurkov*
