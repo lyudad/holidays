@@ -1,46 +1,42 @@
 import React from 'react';
 import { Menu } from 'antd';
-import { StyledContainer, StyledSection } from 'components/userMenu/styles';
-// import {
-//   dashboard, profile, users, logout,
-// } from 'components/userMenu/constants';
+import { StyledContainer, StyledMenu } from 'components/userMenu/styles';
+// import ProfilePage from 'pages/userpage/ProfilePage';
 import LANG from 'lanuage/en';
 import { IUser } from 'utils/types';
 
 // добавить обработчик на клик по кнопке, который будет переводить на соответствующие страницы ;
 // времено добавленный пользователь
-// const user: IUser = {
-//   _id: 'qwe',
-//   name: 'string',
-//   role: 'superAdmin',
-// };
+const user: IUser = {
+  _id: 'qwe',
+  name: 'string',
+  role: 'employee',
+};
 
 // получаем роль у user  нам нужна именно роль, а не доступы
 
-const getUserRole = (user: IUser) => user.role;
+// const getUserRole = user.role;
 
-function UserMenu(user: IUser) {
+const UserMenu = () => {
   const MenuOptions = {
     superAdmin: [LANG.dashboard, LANG.users, LANG.logout],
     hrAdmin: [LANG.users, LANG.logout],
     employee: [LANG.profile, LANG.logout],
-    'No role': [],
   };
-  const role = getUserRole(user);
+  const { role } = user;
 
   return (
     <StyledContainer>
-      <Menu>
-        { MenuOptions[role].map((el: string) => (
-          <Menu.Item key={el}>
-            {el}
-          </Menu.Item>
-        ))}
-      </Menu>
-      <StyledSection>
-        <h1> Тут будет полезный контент </h1>
-      </StyledSection>
+      <StyledMenu>
+        <Menu>
+          { MenuOptions[role].map((el: string) => (
+            <Menu.Item key={el}>
+              {el}
+            </Menu.Item>
+          ))}
+        </Menu>
+      </StyledMenu>
     </StyledContainer>
   );
-}
+};
 export default UserMenu;
