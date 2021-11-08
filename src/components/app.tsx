@@ -12,6 +12,7 @@ const App: FC = () => (
       <Route path="/" exact render={() => <HomePage />} />
       <Route path="/users" exact render={() => <UsersPage />} />
       <Route path="/login" exact render={() => <LoginPage />} />
+      {/* <Route path="/login" exact component={<LoginPage />} /> */}
       {/* <ProtectedRoute path="/profile" exact children={<ProfileEditPage />} /> */}
       <Route path="*" render={() => <NotFoundPage />} />
     </Switch>
