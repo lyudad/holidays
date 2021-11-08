@@ -11,6 +11,7 @@ export const DateCalendarForm = styled.div`
   flex-direction: column;
   justify-content: center;
 `;
+
 export const ButtonWrap = styled.div`
   width: clamp(160px, 50%, 320px);
   flex-basis: 40px;
