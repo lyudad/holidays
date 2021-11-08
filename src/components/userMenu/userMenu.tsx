@@ -1,7 +1,7 @@
 import React from 'react';
 import { Menu } from 'antd';
 import { StyledContainer, StyledMenu } from 'components/userMenu/styles';
-// import ProfilePage from 'pages/userpage/ProfilePage';
+
 import LANG from 'lanuage/en';
 import { IUser } from 'utils/types';
 
@@ -10,7 +10,7 @@ import { IUser } from 'utils/types';
 const user: IUser = {
   _id: 'qwe',
   name: 'string',
-  role: 'employee',
+  role: 'superAdmin',
 };
 
 // получаем роль у user  нам нужна именно роль, а не доступы
@@ -28,13 +28,11 @@ const UserMenu = () => {
   return (
     <StyledContainer>
       <StyledMenu>
-        <Menu>
-          { MenuOptions[role].map((el: string) => (
-            <Menu.Item key={el}>
-              {el}
-            </Menu.Item>
-          ))}
-        </Menu>
+        { MenuOptions[role].map((el: string) => (
+          <Menu.Item key={el}>
+            {el}
+          </Menu.Item>
+        ))}
       </StyledMenu>
     </StyledContainer>
   );

@@ -10,6 +10,7 @@ const LANG = {
   'last-name': 'last name',
   sickLeave: 'sick leave',
   vacationDay: 'vacation day(s)',
+  email: 'email',
 };
 
 export default LANG;

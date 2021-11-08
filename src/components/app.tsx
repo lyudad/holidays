@@ -9,11 +9,11 @@ import {
 const App: FC = () => (
   <>
     <Switch>
-      <Route path="/" exact render={() => <HomePage />} />
-      <Route path="/users" exact render={() => <UsersPage />} />
+      <Route path="/" exact component={HomePage} />
+      <Route path="/users" component={UsersPage} />
       {/* <Route path="login" exact render={() => <LoginPage />} /> */}
       {/* <ProtectedRoute path="/profile" exact children={<ProfileEditPage />} /> */}
-      <Route path="/userpage" exact render={() => <ProfilePage />} />
+      <Route path="/userpage" exact component={ProfilePage} />
       <Route path="*" render={() => <NotFoundPage />} />
     </Switch>
   </>

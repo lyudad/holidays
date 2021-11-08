@@ -1,31 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, FC } from 'react';
 import LANG from 'lanuage/en';
 import { StyledSpan, StyledSpanWraper } from './styles';
 
-interface Props {
-  // eslint-disable-next-line react/require-default-props
-  initialValue?: number;
-}
+// получает целого юзера или ID и по нему забирает данные о количестве sickDays и vacationDays
 
-const DaysCounter = ({ initialValue = 0 }: Props) => {
-  const [sickDays] = useState(initialValue);
-  const [vacationDays] = useState(initialValue);
-  const sick = sickDays;
-  const vacation = vacationDays;
+const DaysCounter: FC = () => {
+  const [sickDays] = useState(5);
+  const [vacationDays] = useState(15);
 
-  //
   return (
     <>
       <StyledSpanWraper>
         <StyledSpan>
-          {sick}
-          {' '}
-          {LANG.sickLeave}
+          {`${sickDays} ${LANG.sickLeave}`}
         </StyledSpan>
         <StyledSpan>
-          {vacation}
-          {' '}
-          {LANG.vacationDay}
+          {`${vacationDays} ${LANG.vacationDay}` }
         </StyledSpan>
       </StyledSpanWraper>
     </>
