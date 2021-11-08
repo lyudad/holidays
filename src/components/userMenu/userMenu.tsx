@@ -1,6 +1,6 @@
 import React from 'react';
 import { Menu } from 'antd';
-import { StyledContainer } from 'components/userMenu/styles';
+import { StyledContainer, StyledMenu } from 'components/userMenu/styles';
 import LANG from 'language/en';
 import { IUser } from 'utils/types';
 
@@ -18,17 +18,18 @@ function UserMenu(user: IUser) {
   };
   const role = getUserRole(user);
   const handleClick = (e: React.HTMLProps<HTMLButtonElement>) => {
+    // eslint-disable-next-line no-console
     console.log('click ', e);
   };
   return (
     <StyledContainer>
-      <Menu>
+      <StyledMenu>
         { MenuOptions[role].map((el: string) => (
           <Menu.Item key={el} onClick={handleClick}>
             {el}
           </Menu.Item>
         ))}
-      </Menu>
+      </StyledMenu>
     </StyledContainer>
   );
 }
