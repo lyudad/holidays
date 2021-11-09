@@ -18,3 +18,10 @@ export const ButtonWrap = styled.div`
   align-self: flex-end;
   
 `;
+
+export const DateFormBottom = styled.div`
+  width: clamp(160px, 50%, 320px);
+  flex-basis: 40px;
+  align-self: flex-end;
+  
+`;

@@ -3,25 +3,26 @@ import React, { FC } from 'react';
 import DateCalendar from 'components/Calendar';
 import ActionButton from 'components/ActionButton';
 import DateCascader from 'components/Cascade/index';
-// import { ADD_USER_BUTTON_TEXT } from 'utils/texts-constants';
-import { ButtonWrap, DateCalendarForm } from './styles';
+import { ButtonWrap, DateCalendarForm, DateFormBottom } from './styles';
 
 const Calendar: FC = () => (
   <DateCalendarForm>
     <DateCalendar />
-    <DateCascader />
-    <ButtonWrap>
-      <ActionButton
-        block
-        type="default"
-        shape="round"
-        size="middle"
-      // eslint-disable-next-line no-console
-        onClick={() => console.log('submit')}
-      >
-        Submit
-      </ActionButton>
-    </ButtonWrap>
+    <DateFormBottom>
+      <DateCascader />
+      <ButtonWrap>
+        <ActionButton
+          block
+          type="default"
+          shape="round"
+          size="middle"
+           // eslint-disable-next-line no-console
+          onClick={() => console.log('submit')}
+        >
+          Submit
+        </ActionButton>
+      </ButtonWrap>
+    </DateFormBottom>
   </DateCalendarForm>
 );
 
