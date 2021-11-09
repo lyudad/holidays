@@ -9,7 +9,9 @@ const LANG = {
   'first-name': 'first name',
   'last-name': 'last name',
   sickLeave: 'sick leave',
-  vacationDay: 'vacation day(s)',
+  sickLeaves: 'sick leaves',
+  vacationDay: 'vacation day',
+  vacationDays: 'vacation days',
   email: 'email',
 };
 

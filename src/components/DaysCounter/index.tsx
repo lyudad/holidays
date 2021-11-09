@@ -1,25 +1,28 @@
-import React, { useState, FC } from 'react';
+import React from 'react';
 import LANG from 'lanuage/en';
 import { StyledSpan, StyledSpanWraper } from './styles';
 
 // получает целого юзера или ID и по нему забирает данные о количестве sickDays и vacationDays
+// type State = {
+//   sickDays: number;
+//   vacationDays: number;
+// };
+interface Props {
+  sickDays: number;
+  vacationDays: number;
+}
 
-const DaysCounter: FC = () => {
-  const [sickDays] = useState(5);
-  const [vacationDays] = useState(15);
-
-  return (
-    <>
-      <StyledSpanWraper>
-        <StyledSpan>
-          {`${sickDays} ${LANG.sickLeave}`}
-        </StyledSpan>
-        <StyledSpan>
-          {`${vacationDays} ${LANG.vacationDay}` }
-        </StyledSpan>
-      </StyledSpanWraper>
-    </>
-  );
-};
+const DaysCounter = ({ sickDays = 5, vacationDays = 15 }: Props) => (
+  <>
+    <StyledSpanWraper>
+      <StyledSpan>
+        {sickDays === 1 ? `${sickDays} ${LANG.sickLeave}` : `${sickDays} ${LANG.sickLeaves}`}
+      </StyledSpan>
+      <StyledSpan>
+        { vacationDays === 1 ? `${vacationDays} ${LANG.vacationDay}` : `${vacationDays} ${LANG.vacationDays}` }
+      </StyledSpan>
+    </StyledSpanWraper>
+  </>
+);
 
 export default DaysCounter;

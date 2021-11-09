@@ -41,7 +41,7 @@ const ProfilePage = () => {
               </>
               )}
             </StyledInputWraper>
-            <DaysCounter />
+            <DaysCounter sickDays={1} vacationDays={1} />
             <StyledButton>
               <ActionButton
                 onClick={(): void => {
