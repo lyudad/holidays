@@ -4,6 +4,19 @@ import React, { FC } from 'react';
 import 'antd/dist/antd.css';
 import { DateCasc } from './styles';
 
+// export const DateCascader: FC = () => {
+//   const [state, setState] = useState({ value: '' });
+
+//   const handleChange = (event: ChangeEvent<{ value: string }>) => {
+//     setState({ value: event?.currentTarget?.value });
+//   };
+//   return (
+//     <DateCasc>
+//       <Cascader onChange={handleChange} />
+//       <p>{ state?.value}</p>
+//     </DateCasc>
+//   );
+// };
 const options = [
   {
     value: 'vacation',
