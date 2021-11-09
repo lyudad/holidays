@@ -6,19 +6,7 @@ import { Cascader } from 'antd';
 import React, { FC } from 'react';
 import 'antd/dist/antd.css';
 import { DateCasc } from './styles';
-
-const Vacation = [
-  {
-    value: 'vacation',
-    label: 'vacation',
-  }];
-const Sick_leave = [
-  {
-    value: 'sick_leave',
-    label: 'Sick_leave',
-  },
-];
-const Options = { Vacation, Sick_leave };
+import { options } from './constants';
 
 function onChange(value: any) {
   console.log(value);
@@ -26,7 +14,7 @@ function onChange(value: any) {
 
 const DateCascader:FC = () => (
   <DateCasc>
-    <Cascader options={Options} onChange={onChange} />
+    <Cascader options={options} onChange={onChange} />
   </DateCasc>
 );
   
