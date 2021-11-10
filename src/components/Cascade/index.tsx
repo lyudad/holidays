@@ -12,7 +12,7 @@ import 'antd/dist/antd.css';
 import { DateCasc } from './styles';
 import { options } from './constants';
 
-function onChange(value: CascaderValueType, selectedOptions?: CascaderOptionType[] | undefined): any {
+function onChange(value: CascaderValueType, selectedOptions?: CascaderOptionType[] | undefined) {
   console.log(value);
 }
 
@@ -23,6 +23,3 @@ const DateCascader:FC = () => (
 );
   
 export default DateCascader;
-function value(value: any) {
-  throw new Error('Function not implemented.');
-}
