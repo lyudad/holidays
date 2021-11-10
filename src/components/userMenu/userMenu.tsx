@@ -13,10 +13,6 @@ const user: IUser = {
   role: 'superAdmin',
 };
 
-// получаем роль у user  нам нужна именно роль, а не доступы
-
-// const getUserRole = user.role;
-
 const UserMenu = () => {
   const MenuOptions = {
     superAdmin: [LANG.dashboard, LANG.users, LANG.logout],

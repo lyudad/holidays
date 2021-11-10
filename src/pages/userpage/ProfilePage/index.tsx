@@ -15,7 +15,7 @@ import UserMenu from 'components/userMenu';
 import TableComponent from 'components/Table';
 import { IUser } from 'utils/types';
 import { EMPLOYEE_ROLE, ADD_USER_BUTTON_TEXT } from 'utils/texts-constants';
-
+// import { columnsIncome, dataIncome } from 'components/Table/constants';
 // времено добавленный пользователь
 const user: IUser = {
   _id: 'qwe',
@@ -41,7 +41,7 @@ const ProfilePage = () => {
               </>
               )}
             </StyledInputWraper>
-            <DaysCounter sickDays={1} vacationDays={1} />
+            <DaysCounter sickDays={5} vacationDays={15} />
             <StyledButton>
               <ActionButton
                 onClick={(): void => {

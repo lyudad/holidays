@@ -12,7 +12,7 @@ interface Props {
   vacationDays: number;
 }
 
-const DaysCounter = ({ sickDays = 5, vacationDays = 15 }: Props) => (
+const DaysCounter = ({ sickDays, vacationDays }: Props) => (
   <>
     <StyledSpanWraper>
       <StyledSpan>
