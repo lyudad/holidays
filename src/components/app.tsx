@@ -1,4 +1,4 @@
-import { NotFoundPage, HomePage } from 'pages';
+import { NotFoundPage, HomePage, AdminDash } from 'pages';
 import UsersPage from 'pages/users';
 import LoginPage from 'pages/loginPage';
 import React, { FC } from 'react';
@@ -12,6 +12,8 @@ const App: FC = () => (
       <Route path="/" exact render={() => <HomePage />} />
       <Route path="/login" exact component={LoginPage} />
       <Route path="/users" exact render={() => <UsersPage />} />
+      <Route path="/users/dash" component={AdminDash} />
+      {/* <Route path="login" exact render={() => <LoginPage />} /> */}
       {/* <ProtectedRoute path="/profile" exact children={<ProfileEditPage />} /> */}
       <Route path="*" render={() => <NotFoundPage />} />
     </Switch>
