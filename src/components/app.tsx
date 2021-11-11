@@ -1,6 +1,7 @@
 import { NotFoundPage, HomePage } from 'pages';
 import ProfilePage from 'pages/userpage/ProfilePage';
 import UsersPage from 'pages/users';
+import LoginPage from 'pages/loginPage';
 import React, { FC } from 'react';
 import {
   Switch, Route,
