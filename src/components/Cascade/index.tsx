@@ -1,9 +1,4 @@
-/* eslint-disable @typescript-eslint/no-shadow */
-/* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable quote-props */
-/* eslint-disable @typescript-eslint/naming-convention */
-/* eslint-disable no-trailing-spaces */
 /* eslint-disable no-console */
 import { Cascader } from 'antd';
 import React, { FC } from 'react';
@@ -21,5 +16,5 @@ const DateCascader:FC = () => (
     <Cascader options={options} onChange={onChange} />
   </DateCasc>
 );
-  
+
 export default DateCascader;

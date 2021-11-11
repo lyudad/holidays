@@ -1,6 +1,5 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable import/prefer-default-export */
-/* eslint-disable linebreak-style */
 import styled from 'styled-components';
 import { DatePicker } from 'antd';
 import {
@@ -9,9 +8,9 @@ import {
 
 export const DateForm = styled(DatePicker)`
 display: block;
-margin-left: 40px;
+margin-left: 0;
 margin-rigth: auto;
-margin-top: 40px;
+margin-top: 0;
 width: 1200;
  ${textPrimary};
 `;
