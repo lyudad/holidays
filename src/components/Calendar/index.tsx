@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 import React, { FC } from 'react';
 import { DatePicker } from 'antd';
 import 'antd/dist/antd.css';
