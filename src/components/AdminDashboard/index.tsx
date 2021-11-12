@@ -1,7 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable react/jsx-no-bind */
-/* eslint-disable @typescript-eslint/indent */
-/* eslint-disable linebreak-style */
 import React from 'react';
 import { Table } from 'antd';
 import FormTable from './styles';

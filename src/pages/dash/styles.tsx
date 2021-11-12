@@ -1,6 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable linebreak-style */
 import styled from 'styled-components';
 
 export const DashForm = styled.div`

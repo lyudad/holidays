@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-console */
 import { Cascader } from 'antd';
 import React, { FC } from 'react';
 import { CascaderValueType, CascaderOptionType } from 'antd/lib/cascader';

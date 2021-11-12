@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 import React, { FC } from 'react';
 import DateCalendar from 'components/Calendar';
 import ActionButton from 'components/ActionButton';
@@ -16,7 +15,6 @@ const Calendar: FC = () => (
           type="default"
           shape="round"
           size="middle"
-           // eslint-disable-next-line no-console
           onClick={() => console.log('submit')}
         >
           Submit
