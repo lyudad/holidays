@@ -35,6 +35,11 @@
     "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es6": true,
+      "node": true
+    },
     "extends": [
       "react-app",
       "react-app/jest",
@@ -48,7 +53,15 @@
     "rules": {
       "import/extensions": "off",
       "import/no-absolute-path": "off",
-      "react/jsx-props-no-spreading": "off"
+      "react/jsx-props-no-spreading": "off",
+      "semi": "off",
+      "no-console": "off",
+      "linebreak-style": "off",
+      "eol-last": "off",
+      "jsx-a11y/aria-role": "off",
+      "import/prefer-default-export": "off",
+      "@typescript-eslint/no-unused-vars": "off",
+      "react/jsx-no-bind": "off"
     },
     "ignorePatterns": [
       "/src/stories/*"
