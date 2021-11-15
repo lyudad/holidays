@@ -24,12 +24,27 @@ export const userSlice = createSlice({
       state.loggedIn = false;
       state.user = null;
     },
+    fetchingUser: (state) => {
+      state.isLoading = true;
+    },
+    fetchingUserSuccess: (state, action: PayloadAction<IUser[]>) => {
+      state.isLoading = false;
+      state.error = '';
+      state.users = action.payload;
+    },
+    fetchingUserError: (state, action: PayloadAction<string>) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   },
 });
 
 export const {
   signIn,
   signOut,
+  fetchingUser,
+  fetchingUserSuccess,
+  fetchingUserError,
 } = userSlice.actions;
 
 export default userSlice.reducer;
