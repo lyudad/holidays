@@ -28,7 +28,7 @@ const ProfilePage = () => {
   return (
     <>
       <StyledPage>
-        <UserMenu />
+        <UserMenu _id="" name="" role="superAdmin" />
         <StyledContent>
           <StyledInfoSection>
             <StyledInputWraper>
