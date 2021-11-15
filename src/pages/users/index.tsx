@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import React, { FC } from 'react';
 import ActionButton from 'components/ActionButton';
 import { ADD_USER_BUTTON_TEXT } from 'utils/texts-constants';
@@ -14,7 +15,6 @@ const UsersPage: FC = () => (
         type="default"
         shape="round"
         size="large"
-        // eslint-disable-next-line no-console
         onClick={() => console.log('add another user cb')}
       >
         {ADD_USER_BUTTON_TEXT}
