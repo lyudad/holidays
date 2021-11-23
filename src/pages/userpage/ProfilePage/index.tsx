@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import InputComponent from 'components/Input';
 import ActionButton from 'components/ActionButton';
 import DaysCounter from 'components/DaysCounter';
@@ -22,21 +22,82 @@ const user: IUser = {
   name: 'string',
   role: 'superAdmin',
 };
+
+// type LogFn = (m: string, v: string) => string;
+// interface Type{
+//   type: string;
+//   value: string;
+//   name: string;
+//   pattern: string;
+//   title: string;
+//   required: true;
+//   onChange: (evt: any) => void; text: string;
+// }
+
 const ProfilePage = () => {
   const { role } = user;
+  const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+
+  const handleChange = (name: string, value: string) => {
+    console.log(email, firstName, lastName, 'Profile');
+    switch (name) {
+      case 'email':
+        return setEmail(value);
+      case 'first-name':
+        return setFirstName(value);
+      case 'last-name':
+        return setLastName(value);
+      default:
+        return console.log(value);
+    }
+  };
+  const handleSubmit: any = () => {
+    // console.log('Click', evt.target);
+    const createNewPassword = {
+      firstName,
+      lastName,
+      email,
+      password: 'jffghioer',
+    };
+    if (firstName === '' || lastName === '' || email === '') {
+      console.log('new obj didn`t created');
+    }
+    console.log(createNewPassword, 'new obj create');
+    // dispatch(authOperations.logIn({ email, password }));
+    // setEmail('');
+    // setFirstName('');
+    // setLastName('');
+  };
 
   return (
     <>
       <StyledPage>
-        <UserMenu />
+        <UserMenu {...user} />
         <StyledContent>
           <StyledInfoSection>
             <StyledInputWraper>
-              <InputComponent text={LANG['first-name']} />
-              <InputComponent text={LANG['last-name']} />
+              <InputComponent
+                type="text"
+                name={LANG['first-name']}
+                text={LANG['first-name']}
+                onInput={handleChange}
+              />
+              <InputComponent
+                type="text"
+                name={LANG['last-name']}
+                text={LANG['last-name']}
+                onInput={handleChange}
+              />
               {!(role === EMPLOYEE_ROLE) && (
               <>
-                <InputComponent text={LANG.email} />
+                <InputComponent
+                  type="email"
+                  name={LANG.email}
+                  text={LANG.email}
+                  onInput={handleChange}
+                />
                 <ActionButton>{ADD_USER_BUTTON_TEXT}</ActionButton>
               </>
               )}
@@ -55,7 +116,7 @@ const ProfilePage = () => {
               <ActionButton
                 onClick={(): void => {
                   // eslint-disable-next-line no-console
-                  console.log('cliked');
+                  handleSubmit();
                 }}
               >
                 send password
