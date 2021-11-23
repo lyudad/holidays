@@ -19,9 +19,10 @@ function InputComponent(
     onInput,
   }: Props,
 ) {
-  const [value] = useState('');
+  const [value, setValue] = useState('');
   const handleChange = (evt: any) => {
-    const currentValue: string = evt.currentTarget.value;
+    setValue(evt.target.value);
+    const currentValue: string = evt.target.value;
     const currentName: string = evt.currentTarget.name;
     onInput(currentName, currentValue);
   };

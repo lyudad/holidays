@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+// import * as uuid from 'uuid/v4';
 import InputComponent from 'components/Input';
 import ActionButton from 'components/ActionButton';
 import DaysCounter from 'components/DaysCounter';
@@ -23,17 +25,6 @@ const user: IUser = {
   role: 'superAdmin',
 };
 
-// type LogFn = (m: string, v: string) => string;
-// interface Type{
-//   type: string;
-//   value: string;
-//   name: string;
-//   pattern: string;
-//   title: string;
-//   required: true;
-//   onChange: (evt: any) => void; text: string;
-// }
-
 const ProfilePage = () => {
   const { role } = user;
   const [email, setEmail] = useState('');
@@ -41,34 +32,42 @@ const ProfilePage = () => {
   const [lastName, setLastName] = useState('');
 
   const handleChange = (name: string, value: string) => {
-    console.log(email, firstName, lastName, 'Profile');
+    // eslint-disable-next-line no-console
+    console.log(name, 'Profile');
     switch (name) {
       case 'email':
-        return setEmail(value);
+        setEmail(value);
+        break;
       case 'first-name':
-        return setFirstName(value);
+        setFirstName(value);
+        break;
       case 'last-name':
-        return setLastName(value);
+        setLastName(value);
+        break;
       default:
-        return console.log(value);
+        // eslint-disable-next-line no-console
+        console.log('Ooops');
+        break;
     }
   };
+  function randomId(): string {
+    return uuidv4();
+  }
   const handleSubmit: any = () => {
     // console.log('Click', evt.target);
     const createNewPassword = {
+      password: randomId(),
       firstName,
       lastName,
       email,
-      password: 'jffghioer',
     };
-    if (firstName === '' || lastName === '' || email === '') {
-      console.log('new obj didn`t created');
+    if (firstName !== '' && lastName !== '' && email !== '') {
+      // eslint-disable-next-line no-console
+      console.log(createNewPassword, 'new obj create');
+      return;
     }
-    console.log(createNewPassword, 'new obj create');
+    alert('Try to fill all fields');
     // dispatch(authOperations.logIn({ email, password }));
-    // setEmail('');
-    // setFirstName('');
-    // setLastName('');
   };
 
   return (
@@ -80,13 +79,13 @@ const ProfilePage = () => {
             <StyledInputWraper>
               <InputComponent
                 type="text"
-                name={LANG['first-name']}
+                name="first-name"
                 text={LANG['first-name']}
                 onInput={handleChange}
               />
               <InputComponent
                 type="text"
-                name={LANG['last-name']}
+                name="last-name"
                 text={LANG['last-name']}
                 onInput={handleChange}
               />
