@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-// import * as uuid from 'uuid/v4';
 import InputComponent from 'components/Input';
 import ActionButton from 'components/ActionButton';
 import DaysCounter from 'components/DaysCounter';
@@ -25,23 +24,28 @@ const user: IUser = {
   role: 'superAdmin',
 };
 
+// interface State {
+//   email: string,
+//   firstName: string,
+//   lastName: string
+// }
+
 const ProfilePage = () => {
   const { role } = user;
-  const [email, setEmail] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState<string>('');
+  const [firstName, setFirstName] = useState<string>('');
+  const [lastName, setLastName] = useState<string>('');
+  const [data, setData] = useState<string | null>(null);
 
   const handleChange = (name: string, value: string) => {
-    // eslint-disable-next-line no-console
-    console.log(name, 'Profile');
     switch (name) {
       case 'email':
         setEmail(value);
         break;
-      case 'first-name':
+      case 'firstName':
         setFirstName(value);
         break;
-      case 'last-name':
+      case 'lastName':
         setLastName(value);
         break;
       default:
@@ -53,7 +57,7 @@ const ProfilePage = () => {
   function randomId(): string {
     return uuidv4();
   }
-  const handleSubmit: any = () => {
+  const handleSubmit = (): void => {
     // console.log('Click', evt.target);
     const createNewPassword = {
       password: randomId(),
@@ -64,8 +68,13 @@ const ProfilePage = () => {
     if (firstName !== '' && lastName !== '' && email !== '') {
       // eslint-disable-next-line no-console
       console.log(createNewPassword, 'new obj create');
+      setEmail('');
+      setFirstName('');
+      setLastName('');
+      setData('');
       return;
     }
+    // eslint-disable-next-line no-alert
     alert('Try to fill all fields');
     // dispatch(authOperations.logIn({ email, password }));
   };
@@ -79,15 +88,17 @@ const ProfilePage = () => {
             <StyledInputWraper>
               <InputComponent
                 type="text"
-                name="first-name"
+                name="firstName"
                 text={LANG['first-name']}
                 onInput={handleChange}
+                updateData={data}
               />
               <InputComponent
                 type="text"
-                name="last-name"
+                name="lastName"
                 text={LANG['last-name']}
                 onInput={handleChange}
+                updateData={data}
               />
               {!(role === EMPLOYEE_ROLE) && (
               <>
@@ -96,6 +107,7 @@ const ProfilePage = () => {
                   name={LANG.email}
                   text={LANG.email}
                   onInput={handleChange}
+                  updateData={data}
                 />
                 <ActionButton>{ADD_USER_BUTTON_TEXT}</ActionButton>
               </>
@@ -113,7 +125,7 @@ const ProfilePage = () => {
               </ActionButton>
               { !(role === EMPLOYEE_ROLE) && (
               <ActionButton
-                onClick={(): void => {
+                onClick={() => {
                   // eslint-disable-next-line no-console
                   handleSubmit();
                 }}
