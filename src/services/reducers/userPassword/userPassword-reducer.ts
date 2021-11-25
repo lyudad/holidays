@@ -14,25 +14,39 @@ import {
   pushPassSuccess,
   // pushPassError,
 } from './userPassword-actions';
+import { ActionsTypes, ADD_PASSWORD_SUCCESS, IActionSuccess } from './userPasswordInterfeces/action-interfaces';
 
-interface User {
+type IUser = {
   id: string;
   firstName: string;
   lastName: string;
   email: string;
 }
+interface IDispach {
+  type: string,
+  payload: IUser| undefined,
+}
 
-const initialState = [] as User[];
+const initialState = [ { id: '0', firstName: 'Pjj', lastName: 'Yuuu', email: 'dhd@ggh.ic'}] as IUser[];
 
 
 const userPasswordReducer = createReducer(initialState, {
 
-  ['user/addPasswordSuccess']: (state, { payload }: any) => {
-     // eslint-disable-next-line no-console
-    console.log(state, payload, 'reducer');
-    return [state, ...payload]
-  },
+  [ADD_PASSWORD_SUCCESS]: (state = initialState, action: IDispach) =>
+  {
+
+    // console.log(action.payload, 'iooo');
+    // return [ state, ...action.payload];
+  }
 });
 
+// function userPasswordReducer(state = initialState, action: IActionSuccess) {
+//   switch (action.type) {
+//     case ADD_PASSWORD_SUCCESS:
+//       return [state, ...action.payload]
+//     default:
+//       return state
+//   }
+// }
 
 export default userPasswordReducer;

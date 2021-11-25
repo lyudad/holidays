@@ -2,7 +2,6 @@ import React from 'react';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-// import { Form } from 'antd';
 import { IUser } from 'utils/types';
 import { EMPLOYEE_ROLE, ADD_USER_BUTTON_TEXT } from 'utils/texts-constants';
 import InputComponent from 'components/Input';
@@ -44,14 +43,15 @@ type FormValues = {
 };
 const ProfilePage = () => {
   const { role } = user;
-  // const [form] = Form.useForm();
-  // const onReset = () => {
-  //   form.resetFields();
-  // };
-  // const [value, setValue] = useState<string>('');
+
   const dispatch = useDispatch();
 
-  const { handleSubmit, control, formState: { errors } } = useForm<FormValues>({
+  const {
+    handleSubmit,
+    reset,
+    control,
+    formState: { errors },
+  } = useForm<FormValues>({
     defaultValues: {
       firstName: '',
       lastName: '',
@@ -61,15 +61,14 @@ const ProfilePage = () => {
     mode: 'onChange',
   });
   const onSubmit = (data: FormValues) => {
-    // eslint-disable-next-line no-console
     const { firstName, lastName, email } = data;
-    // eslint-disable-next-line no-console
-    console.log(firstName, lastName, email);
+
     dispatch(addUserPassword({
       firstName,
       lastName,
       email,
     }));
+    reset();
   };
 
   return (
@@ -81,7 +80,6 @@ const ProfilePage = () => {
             <StyledInputWraper>
               <StyledWrapInput>
                 <InputComponent
-                // type="text"
                   name="firstName"
                 // text={LANG['first-name']}
                   control={control}
@@ -93,7 +91,6 @@ const ProfilePage = () => {
               </StyledWrapInput>
               <StyledWrapInput>
                 <InputComponent
-                // type="text"
                   name="lastName"
                   control={control}
                 // text={LANG['last-name']}
@@ -107,12 +104,10 @@ const ProfilePage = () => {
                 <>
                   <StyledWrapInput>
                     <InputComponent
-                    // type="email"
                       name="email"
-                    // text={LANG.email}
+                      // text={LANG.email}
                       control={control}
                       rules={{ required: true }}
-                  // updateData={data}
                     />
                     <StyledNotification>
                       {errors.email?.message}

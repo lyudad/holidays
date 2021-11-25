@@ -1,39 +1,10 @@
 {
   "user": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    },
-    {
-      "id": "47fae601-5489-4481-b3a7-3e49a6271dfc",
-      "firstName": "Rosie",
-      "lastName": "Simp",
+      "id": "55b4415b-c01b-4a61-9089-103b4b7cf088",
+      "firstName": "Renat",
+      "lastName": "Shevchuk",
       "email": "shevchuk_re@ukr.net"
-    },
-    {
-      "id": "cd57dd7c-2f6f-4ff2-a611-bd309907db7b",
-      "firstName": "Rosie",
-      "lastName": "Simp",
-      "email": "ignatognevic@gmail.com"
-    },
-    {
-      "id": "c9677416-08fb-4fb7-a0c3-7d0f3f553879",
-      "firstName": "Rosie",
-      "lastName": "Simp",
-      "email": "shevchuk_re@ukr.net"
-    },
-    {
-      "id": "a1c09518-704b-414a-b405-24c3ccc8ad01",
-      "firstName": "Rosie",
-      "lastName": "Simp",
-      "email": "shevchuk_re@ukr.net"
-    },
-    {
-      "id": "c5c7e12e-8793-4c8f-ab28-fedcbff8375c",
-      "firstName": "Carolina",
-      "lastName": "Fetonita",
-      "email": "ignatognevic@gmail.com"
     }
   ]
 }

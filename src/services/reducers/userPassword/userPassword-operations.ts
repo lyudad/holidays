@@ -6,6 +6,7 @@
 /* eslint-disable eol-last */
 /* eslint-disable  */
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import {
   pushPassRequest,
@@ -20,16 +21,21 @@ type FormValues = {
   lastName: string;
   email: string;
 };
-interface User {
+interface IUser {
   id: string;
   firstName: string;
   lastName: string;
   email: string;
 }
 
+interface IDispach {
+  type: string,
+  payload: IUser[] | undefined,
+}
+
 const addUserPassword = (data: FormValues) => (dispatch : any) => {
     const { firstName, lastName, email } = data;
-
+ console.log(dispatch, 'add')
     const contactNew = {
         id: uuidv4(),
         firstName,
@@ -41,7 +47,7 @@ const addUserPassword = (data: FormValues) => (dispatch : any) => {
 
     axios.post(
         '/user', contactNew)
-        .then(res => dispatch({type: 'user/addPasswordSuccess', payload: res.data}))
+        .then(res => dispatch({type: '@user/addPasswordSuccess', payload: res.data}))
         .catch(error => dispatch({type: 'user/addPasswordError', payload: error}));
 };
 

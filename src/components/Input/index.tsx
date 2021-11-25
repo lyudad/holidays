@@ -14,24 +14,12 @@ function InputComponent(props: UseControllerProps<FormValues>) {
   const { field } = useController(props);
   const { name } = props;
 
-  // const [value, setValue] = useState<string>('');
-  // useEffect(() => {
-  //   if (updateData === '') {
-  //     setValue(updateData);
-  //   }
-  // }, [updateData]);
-
   return (
     <StyledInput>
       <Input
         {...field}
         placeholder={name}
         type="text"
-        // name={name}
-        // value={value}
-        // onChange={handleChange}
-        // placeholder={name}
-        // ref={register}
         prefix={<UserOutlined />}
       />
     </StyledInput>
