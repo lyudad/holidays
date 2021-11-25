@@ -1,5 +1,6 @@
 import React from 'react';
-// import * as yup from 'yup';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 
 import InputComponent from 'components/Input';
@@ -29,10 +30,12 @@ const user: IUser = {
   role: 'superAdmin',
 };
 
-// interface IFormInputs {
-//   TextField: string
-//   MyCheckbox: boolean
-// }
+const schema = yup.object({
+  firstName: yup.string().max(10, 'Name must be shorter'),
+  lastName: yup.string().max(10, 'Name must be shorter'),
+  email: yup.string().email().max(20, 'Name must be shorter'),
+}).required();
+
 type FormValues = {
   firstName: string;
   lastName: string;
@@ -53,12 +56,13 @@ const ProfilePage = () => {
   //   email: yup.string().email(),
   // });
 
-  const { handleSubmit, control } = useForm<FormValues>({
+  const { handleSubmit, control, formState: { errors } } = useForm<FormValues>({
     defaultValues: {
       firstName: '',
       lastName: '',
       email: '',
     },
+    resolver: yupResolver(schema),
     mode: 'onChange',
   });
   const onSubmit = (data: FormValues) => {
@@ -95,6 +99,7 @@ const ProfilePage = () => {
                 control={control}
                 rules={{ required: true }}
               />
+              <p>{errors.firstName?.message}</p>
               <InputComponent
                 // type="text"
                 name="lastName"
@@ -102,18 +107,20 @@ const ProfilePage = () => {
                 // text={LANG['last-name']}
                 rules={{ required: true }}
               />
+              <p>{errors.lastName?.message}</p>
               {!(role === EMPLOYEE_ROLE) && (
-              <>
-                <InputComponent
-                  // type="email"
-                  name="email"
-                  // text={LANG.email}
-                  control={control}
-                  rules={{ required: true }}
+                <>
+                  <InputComponent
+                    // type="email"
+                    name="email"
+                    // text={LANG.email}
+                    control={control}
+                    rules={{ required: true }}
                   // updateData={data}
-                />
-                <ActionButton>{ADD_USER_BUTTON_TEXT}</ActionButton>
-              </>
+                  />
+                  <p>{errors.email?.message}</p>
+                  <ActionButton>{ADD_USER_BUTTON_TEXT}</ActionButton>
+                </>
               )}
             </StyledInputWraper>
             <DaysCounter sickDays={5} vacationDays={15} />
@@ -126,14 +133,14 @@ const ProfilePage = () => {
               >
                 Add
               </ActionButton>
-              { !(role === EMPLOYEE_ROLE) && (
-              <ActionButton
-                onClick={
-                   handleSubmit(onSubmit)
+              {!(role === EMPLOYEE_ROLE) && (
+                <ActionButton
+                  onClick={
+                    handleSubmit(onSubmit)
                   }
-              >
-                send password
-              </ActionButton>
+                >
+                  send password
+                </ActionButton>
               )}
             </StyledButton>
           </StyledInfoSection>
