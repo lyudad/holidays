@@ -93,7 +93,8 @@ const columns = [
   },
 ];
 
-function onChange(filters: any) {
+  function onChange(filters: any) {
+   // eslint-disable-next-line no-console
   console.log('params', filters);
 }
   return (
