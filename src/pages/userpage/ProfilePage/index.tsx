@@ -2,10 +2,12 @@ import React from 'react';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-
+import { IUser } from 'utils/types';
+import { EMPLOYEE_ROLE, ADD_USER_BUTTON_TEXT } from 'utils/texts-constants';
 import InputComponent from 'components/Input';
 import ActionButton from 'components/ActionButton';
 import DaysCounter from 'components/DaysCounter';
+import { useDispatch } from 'react-redux';
 // import LANG from 'lanuage/en';
 import {
   StyledPage,
@@ -17,12 +19,8 @@ import {
 } from 'pages/userpage/ProfilePage/styles';
 import UserMenu from 'components/userMenu';
 import TableComponent from 'components/Table';
-import { IUser } from 'utils/types';
-import { EMPLOYEE_ROLE, ADD_USER_BUTTON_TEXT } from 'utils/texts-constants';
+import addUserPassword from 'services/reducers/userPassword/userPassword-operations';
 
-// import { useDispatch } from 'react-redux';
-// import pushUserPass from 'services/reducers/userPassword/userPassword-actions';
-// import { columnsIncome, dataIncome } from 'components/Table/constants';
 // времено добавленный пользователь
 const user: IUser = {
   _id: 'qwe',
@@ -31,9 +29,9 @@ const user: IUser = {
 };
 
 const schema = yup.object({
-  firstName: yup.string().max(10, 'Name must be shorter'),
-  lastName: yup.string().max(10, 'Name must be shorter'),
-  email: yup.string().email().max(20, 'Name must be shorter'),
+  firstName: yup.string().min(2, 'First Name must be longer').max(10, 'First Name must be shorter'),
+  lastName: yup.string().min(2, 'Last Name must be longer').max(10, 'Last name must be shorter'),
+  email: yup.string().email().min(4, 'Email must be longer').max(30, 'Email must be shorter'),
 }).required();
 
 type FormValues = {
@@ -44,17 +42,7 @@ type FormValues = {
 const ProfilePage = () => {
   const { role } = user;
   // const [value, setValue] = useState<string>('');
-  // const dispatch = useDispatch();
-
-  //   const {
-  //   handleSubmit,
-  //   register,
-  // } = useForm({
-  //   validationShema: yup.object({
-  //  firstName<string>: yup.string().max(10, 'Name must be shorter')required('Required'),
-  //  lastName: yup.string().max(10, 'Name must be shorter')required('Required'),
-  //   email: yup.string().email(),
-  // });
+  const dispatch = useDispatch();
 
   const { handleSubmit, control, formState: { errors } } = useForm<FormValues>({
     defaultValues: {
@@ -70,19 +58,11 @@ const ProfilePage = () => {
     const { firstName, lastName, email } = data;
     // eslint-disable-next-line no-console
     console.log(firstName, lastName, email);
-    if (firstName !== '' && lastName !== '' && email !== '') {
-      // eslint-disable-next-line no-console
-      console.log('new obj create');
-      // setValue('');
-      // dispatch(pushUserPass({
-      //   firstName,
-      //   lastName,
-      //   email,
-      // }));
-      return;
-    }
-    // eslint-disable-next-line no-alert
-    alert('Try to fill all fields');
+    dispatch(addUserPassword({
+      firstName,
+      lastName,
+      email,
+    }));
   };
 
   return (

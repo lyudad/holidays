@@ -1,0 +1,15 @@
+{
+  "user": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "id": "47fae601-5489-4481-b3a7-3e49a6271dfc",
+      "firstName": "Rosie",
+      "lastName": "Simp",
+      "email": "shevchuk_re@ukr.net"
+    }
+  ]
+}
