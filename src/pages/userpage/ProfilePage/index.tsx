@@ -1,8 +1,6 @@
 import React from 'react';
-// import React, { useState } from 'react';
-// import { v4 as uuidv4 } from 'uuid';
 // import * as yup from 'yup';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 import InputComponent from 'components/Input';
 import ActionButton from 'components/ActionButton';
@@ -31,10 +29,10 @@ const user: IUser = {
   role: 'superAdmin',
 };
 
-interface IFormInputs {
-  TextField: string
-  MyCheckbox: boolean
-}
+// interface IFormInputs {
+//   TextField: string
+//   MyCheckbox: boolean
+// }
 type FormValues = {
   firstName: string;
   lastName: string;
@@ -63,9 +61,8 @@ const ProfilePage = () => {
     },
     mode: 'onChange',
   });
-  const onSubmit: SubmitHandler<IFormInputs> = (data: any): void => {
+  const onSubmit = (data: FormValues) => {
     // eslint-disable-next-line no-console
-    console.log(data);
     const { firstName, lastName, email } = data;
     // eslint-disable-next-line no-console
     console.log(firstName, lastName, email);
@@ -133,7 +130,6 @@ const ProfilePage = () => {
               <ActionButton
                 onClick={
                    handleSubmit(onSubmit)
-                  // onSubmit
                   }
               >
                 send password
