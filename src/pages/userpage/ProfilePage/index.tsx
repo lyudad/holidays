@@ -2,6 +2,7 @@ import React from 'react';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+// import { Form } from 'antd';
 import { IUser } from 'utils/types';
 import { EMPLOYEE_ROLE, ADD_USER_BUTTON_TEXT } from 'utils/texts-constants';
 import InputComponent from 'components/Input';
@@ -16,6 +17,8 @@ import {
   StyledInfoSection,
   StyledButton,
   TableWraper,
+  StyledWrapInput,
+  StyledNotification,
 } from 'pages/userpage/ProfilePage/styles';
 import UserMenu from 'components/userMenu';
 import TableComponent from 'components/Table';
@@ -41,6 +44,10 @@ type FormValues = {
 };
 const ProfilePage = () => {
   const { role } = user;
+  // const [form] = Form.useForm();
+  // const onReset = () => {
+  //   form.resetFields();
+  // };
   // const [value, setValue] = useState<string>('');
   const dispatch = useDispatch();
 
@@ -72,33 +79,45 @@ const ProfilePage = () => {
         <StyledContent>
           <StyledInfoSection>
             <StyledInputWraper>
-              <InputComponent
+              <StyledWrapInput>
+                <InputComponent
                 // type="text"
-                name="firstName"
+                  name="firstName"
                 // text={LANG['first-name']}
-                control={control}
-                rules={{ required: true }}
-              />
-              <p>{errors.firstName?.message}</p>
-              <InputComponent
+                  control={control}
+                  rules={{ required: true }}
+                />
+                <StyledNotification>
+                  {errors.firstName?.message}
+                </StyledNotification>
+              </StyledWrapInput>
+              <StyledWrapInput>
+                <InputComponent
                 // type="text"
-                name="lastName"
-                control={control}
+                  name="lastName"
+                  control={control}
                 // text={LANG['last-name']}
-                rules={{ required: true }}
-              />
-              <p>{errors.lastName?.message}</p>
+                  rules={{ required: true }}
+                />
+                <StyledNotification>
+                  {errors.lastName?.message}
+                </StyledNotification>
+              </StyledWrapInput>
               {!(role === EMPLOYEE_ROLE) && (
                 <>
-                  <InputComponent
+                  <StyledWrapInput>
+                    <InputComponent
                     // type="email"
-                    name="email"
+                      name="email"
                     // text={LANG.email}
-                    control={control}
-                    rules={{ required: true }}
+                      control={control}
+                      rules={{ required: true }}
                   // updateData={data}
-                  />
-                  <p>{errors.email?.message}</p>
+                    />
+                    <StyledNotification>
+                      {errors.email?.message}
+                    </StyledNotification>
+                  </StyledWrapInput>
                   <ActionButton>{ADD_USER_BUTTON_TEXT}</ActionButton>
                 </>
               )}

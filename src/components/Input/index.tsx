@@ -13,6 +13,7 @@ type FormValues = {
 function InputComponent(props: UseControllerProps<FormValues>) {
   const { field } = useController(props);
   const { name } = props;
+
   // const [value, setValue] = useState<string>('');
   // useEffect(() => {
   //   if (updateData === '') {

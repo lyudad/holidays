@@ -29,8 +29,7 @@ interface User {
 
 const addUserPassword = (data: FormValues) => (dispatch : any) => {
     const { firstName, lastName, email } = data;
-    // eslint-disable-next-line no-console
-    console.log(dispatch, 'great');
+
     const contactNew = {
         id: uuidv4(),
         firstName,
@@ -42,8 +41,8 @@ const addUserPassword = (data: FormValues) => (dispatch : any) => {
 
     axios.post(
         '/user', contactNew)
-        .then(res => dispatch({type: 'users/addPasswordSuccess', payload: res.data}))
-        .catch(error => dispatch({type: 'users/addPasswordError', payload: error}));
+        .then(res => dispatch({type: 'user/addPasswordSuccess', payload: res.data}))
+        .catch(error => dispatch({type: 'user/addPasswordError', payload: error}));
 };
 
 export default addUserPassword;

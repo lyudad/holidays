@@ -7,6 +7,6 @@
 
 import { createAction } from '@reduxjs/toolkit';
 
-export const pushPassRequest = createAction('users/addPasswordRequest');
-export const pushPassSuccess = createAction('users/addPasswordSuccess');
-export const pushPassError = createAction('users/addPasswordError');
+export const pushPassRequest = createAction('user/addPasswordRequest');
+export const pushPassSuccess = createAction('user/addPasswordSuccess');
+export const pushPassError = createAction('user/addPasswordError');

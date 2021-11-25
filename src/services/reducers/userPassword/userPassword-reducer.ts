@@ -26,14 +26,8 @@ const initialState = [] as User[];
 
 
 const userPasswordReducer = createReducer(initialState, {
-  [pushPassRequest as any]: (_: any, { payload }: any) =>
-  {
-      // eslint-disable-next-line no-console
-      console.log( payload, 'reducer');
-      return payload;
-  },
 
-  [pushPassSuccess as any]: (state, { payload }: any) => {
+  ['user/addPasswordSuccess']: (state, { payload }: any) => {
      // eslint-disable-next-line no-console
     console.log(state, payload, 'reducer');
     return [state, ...payload]
