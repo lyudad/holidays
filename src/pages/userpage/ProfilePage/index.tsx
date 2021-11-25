@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React from 'react';
+// import React, { useState } from 'react';
+// import { v4 as uuidv4 } from 'uuid';
+// import * as yup from 'yup';
+import { useForm, SubmitHandler } from 'react-hook-form';
+
 import InputComponent from 'components/Input';
 import ActionButton from 'components/ActionButton';
 import DaysCounter from 'components/DaysCounter';
-import LANG from 'lanuage/en';
+// import LANG from 'lanuage/en';
 import {
   StyledPage,
   StyledContent,
@@ -16,6 +20,9 @@ import UserMenu from 'components/userMenu';
 import TableComponent from 'components/Table';
 import { IUser } from 'utils/types';
 import { EMPLOYEE_ROLE, ADD_USER_BUTTON_TEXT } from 'utils/texts-constants';
+
+// import { useDispatch } from 'react-redux';
+// import pushUserPass from 'services/reducers/userPassword/userPassword-actions';
 // import { columnsIncome, dataIncome } from 'components/Table/constants';
 // времено добавленный пользователь
 const user: IUser = {
@@ -24,59 +31,57 @@ const user: IUser = {
   role: 'superAdmin',
 };
 
-// interface State {
-//   email: string,
-//   firstName: string,
-//   lastName: string
-// }
-
+interface IFormInputs {
+  TextField: string
+  MyCheckbox: boolean
+}
+type FormValues = {
+  firstName: string;
+  lastName: string;
+  email: string;
+};
 const ProfilePage = () => {
   const { role } = user;
-  const [email, setEmail] = useState<string>('');
-  const [firstName, setFirstName] = useState<string>('');
-  const [lastName, setLastName] = useState<string>('');
-  const [data, setData] = useState<string | null>(null);
+  // const [value, setValue] = useState<string>('');
+  // const dispatch = useDispatch();
 
-  const handleChange = (name: string, value: string) => {
-    switch (name) {
-      case 'email':
-        setEmail(value);
-        break;
-      case 'firstName':
-        setFirstName(value);
-        break;
-      case 'lastName':
-        setLastName(value);
-        break;
-      default:
-        // eslint-disable-next-line no-console
-        console.log('Ooops');
-        break;
-    }
-  };
-  function randomId(): string {
-    return uuidv4();
-  }
-  const handleSubmit = (): void => {
-    // console.log('Click', evt.target);
-    const createNewPassword = {
-      password: randomId(),
-      firstName,
-      lastName,
-      email,
-    };
+  //   const {
+  //   handleSubmit,
+  //   register,
+  // } = useForm({
+  //   validationShema: yup.object({
+  //  firstName<string>: yup.string().max(10, 'Name must be shorter')required('Required'),
+  //  lastName: yup.string().max(10, 'Name must be shorter')required('Required'),
+  //   email: yup.string().email(),
+  // });
+
+  const { handleSubmit, control } = useForm<FormValues>({
+    defaultValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+    },
+    mode: 'onChange',
+  });
+  const onSubmit: SubmitHandler<IFormInputs> = (data: any): void => {
+    // eslint-disable-next-line no-console
+    console.log(data);
+    const { firstName, lastName, email } = data;
+    // eslint-disable-next-line no-console
+    console.log(firstName, lastName, email);
     if (firstName !== '' && lastName !== '' && email !== '') {
       // eslint-disable-next-line no-console
-      console.log(createNewPassword, 'new obj create');
-      setEmail('');
-      setFirstName('');
-      setLastName('');
-      setData('');
+      console.log('new obj create');
+      // setValue('');
+      // dispatch(pushUserPass({
+      //   firstName,
+      //   lastName,
+      //   email,
+      // }));
       return;
     }
     // eslint-disable-next-line no-alert
     alert('Try to fill all fields');
-    // dispatch(authOperations.logIn({ email, password }));
   };
 
   return (
@@ -87,27 +92,28 @@ const ProfilePage = () => {
           <StyledInfoSection>
             <StyledInputWraper>
               <InputComponent
-                type="text"
+                // type="text"
                 name="firstName"
-                text={LANG['first-name']}
-                onInput={handleChange}
-                updateData={data}
+                // text={LANG['first-name']}
+                control={control}
+                rules={{ required: true }}
               />
               <InputComponent
-                type="text"
+                // type="text"
                 name="lastName"
-                text={LANG['last-name']}
-                onInput={handleChange}
-                updateData={data}
+                control={control}
+                // text={LANG['last-name']}
+                rules={{ required: true }}
               />
               {!(role === EMPLOYEE_ROLE) && (
               <>
                 <InputComponent
-                  type="email"
-                  name={LANG.email}
-                  text={LANG.email}
-                  onInput={handleChange}
-                  updateData={data}
+                  // type="email"
+                  name="email"
+                  // text={LANG.email}
+                  control={control}
+                  rules={{ required: true }}
+                  // updateData={data}
                 />
                 <ActionButton>{ADD_USER_BUTTON_TEXT}</ActionButton>
               </>
@@ -125,10 +131,10 @@ const ProfilePage = () => {
               </ActionButton>
               { !(role === EMPLOYEE_ROLE) && (
               <ActionButton
-                onClick={() => {
-                  // eslint-disable-next-line no-console
-                  handleSubmit();
-                }}
+                onClick={
+                   handleSubmit(onSubmit)
+                  // onSubmit
+                  }
               >
                 send password
               </ActionButton>

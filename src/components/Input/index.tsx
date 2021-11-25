@@ -1,51 +1,43 @@
-import React, { useEffect, useState } from 'react';
+// import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Input } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import StyledInput from 'components/Input/styled';
+import { useController, UseControllerProps } from 'react-hook-form';
 
-type Props = {
-  text: string,
-  type: string,
-  name: string,
-  updateData: string | null,
-  onInput: (name: string, value: string) => void
+// import { FieldValues, UseControllerReturn } from 'react-hook-form';
+// import { UseFormRegisterReturn } from 'react-hook-form';
+type FormValues = {
+  firstName: string;
+  lastName: string;
+  email: string;
 };
-// interface IState {
-//   value: string | null | '',
-// }
-function InputComponent(
-  {
-    text,
-    type,
-    name,
-    updateData,
-    onInput,
-  }: Props,
-) {
-  const [value, setValue] = useState<string>('');
-  useEffect(() => {
-    if (updateData === '') {
-      setValue(updateData);
-    }
-  }, [updateData]);
-  const handleChange = (evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) : void => {
-    setValue(evt.target.value);
-    const currentValue: string = evt.target.value;
-    const currentName: string = evt.currentTarget.name;
-    onInput(currentName, currentValue);
-  };
+
+function InputComponent(props: UseControllerProps<FormValues>) {
+  // const { field } = useController(props);
+  const { field } = useController(props);
+  const { name } = props;
+  // const [value, setValue] = useState<string>('');
+  // useEffect(() => {
+  //   if (updateData === '') {
+  //     setValue(updateData);
+  //   }
+  // }, [updateData]);
+
   return (
     <StyledInput>
       <Input
-        type={type}
-        name={name}
-        value={value}
-        onChange={handleChange}
-        placeholder={text}
+        {...field}
+        placeholder={name}
+        type="text"
+        // name={name}
+        // value={value}
+        // onChange={handleChange}
+        // placeholder={name}
+        // ref={register}
         prefix={<UserOutlined />}
       />
     </StyledInput>
-
   );
 }
 export default InputComponent;
