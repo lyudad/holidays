@@ -25,4 +25,5 @@ function InputComponent(props: UseControllerProps<FormValues>) {
     </StyledInput>
   );
 }
+
 export default InputComponent;

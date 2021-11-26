@@ -1,14 +1,16 @@
 import React from 'react';
-import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { IUser } from 'utils/types';
-import { EMPLOYEE_ROLE, ADD_USER_BUTTON_TEXT } from 'utils/texts-constants';
 import InputComponent from 'components/Input';
 import ActionButton from 'components/ActionButton';
 import DaysCounter from 'components/DaysCounter';
+import UserMenu from 'components/userMenu';
+import TableComponent from 'components/Table';
+import schema from 'components/Input/validation';
+import addUserPassword from 'services/reducers/userPassword/userPassword-operations';
+import { IUser } from 'utils/types';
+import { EMPLOYEE_ROLE, ADD_USER_BUTTON_TEXT } from 'utils/texts-constants';
 import { useDispatch } from 'react-redux';
-// import LANG from 'lanuage/en';
 import {
   StyledPage,
   StyledContent,
@@ -19,9 +21,6 @@ import {
   StyledWrapInput,
   StyledNotification,
 } from 'pages/userpage/ProfilePage/styles';
-import UserMenu from 'components/userMenu';
-import TableComponent from 'components/Table';
-import addUserPassword from 'services/reducers/userPassword/userPassword-operations';
 
 // времено добавленный пользователь
 const user: IUser = {
@@ -29,12 +28,6 @@ const user: IUser = {
   name: 'string',
   role: 'superAdmin',
 };
-
-const schema = yup.object({
-  firstName: yup.string().min(2, 'First Name must be longer').max(10, 'First Name must be shorter'),
-  lastName: yup.string().min(2, 'Last Name must be longer').max(10, 'Last name must be shorter'),
-  email: yup.string().email().min(4, 'Email must be longer').max(30, 'Email must be shorter'),
-}).required();
 
 type FormValues = {
   firstName: string;
@@ -81,7 +74,6 @@ const ProfilePage = () => {
               <StyledWrapInput>
                 <InputComponent
                   name="firstName"
-                // text={LANG['first-name']}
                   control={control}
                   rules={{ required: true }}
                 />
@@ -93,7 +85,6 @@ const ProfilePage = () => {
                 <InputComponent
                   name="lastName"
                   control={control}
-                // text={LANG['last-name']}
                   rules={{ required: true }}
                 />
                 <StyledNotification>
@@ -105,7 +96,6 @@ const ProfilePage = () => {
                   <StyledWrapInput>
                     <InputComponent
                       name="email"
-                      // text={LANG.email}
                       control={control}
                       rules={{ required: true }}
                     />
