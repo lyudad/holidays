@@ -1,54 +1,30 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable react/jsx-no-bind */
-/* eslint-disable @typescript-eslint/indent */
-/* eslint-disable linebreak-style */
-/* eslint-disable linebreak-style */
-/* eslint-disable eol-last */
-/* eslint-disable  */
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import {
-  pushPassRequest,
-  // pushPassSuccess,
-  // pushPassError,
-} from './userPassword-actions';
+  ADD_PASSWORD_ERROR,
+  ADD_PASSWORD_REQUEST,
+  ADD_PASSWORD_SUCCESS,
+  FormValues,
+} from './usePassword-interfaces';
 
 axios.defaults.baseURL = 'http://localhost:3004';
 
-type FormValues = {
-  firstName: string;
-  lastName: string;
-  email: string;
-};
-interface IUser {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-}
+const addUserPassword = (data: FormValues) => (dispatch:
+(newState: { type: string, payload?: FormValues }) => void) => {
+  const { firstName, lastName, email } = data;
 
-interface IDispach {
-  type: string,
-  payload: IUser[] | undefined,
-}
+  const user = {
+    id: uuidv4(),
+    firstName,
+    lastName,
+    email,
+  };
 
-const addUserPassword = (data: FormValues) => (dispatch : any) => {
-    const { firstName, lastName, email } = data;
- console.log(dispatch, 'add')
-    const contactNew = {
-        id: uuidv4(),
-        firstName,
-        lastName,
-        email,
-    };
+  dispatch({ type: ADD_PASSWORD_REQUEST });
 
-    dispatch(pushPassRequest());
-
-    axios.post(
-        '/user', contactNew)
-        .then(res => dispatch({type: '@user/addPasswordSuccess', payload: res.data}))
-        .catch(error => dispatch({type: 'user/addPasswordError', payload: error}));
+  axios.post('/user', user)
+    .then((res) => dispatch({ type: ADD_PASSWORD_SUCCESS, payload: res.data }))
+    .catch((error) => dispatch({ type: ADD_PASSWORD_ERROR, payload: error }));
 };
 
 export default addUserPassword;
