@@ -1,4 +1,5 @@
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import InputComponent from 'components/Input';
@@ -6,11 +7,10 @@ import ActionButton from 'components/ActionButton';
 import DaysCounter from 'components/DaysCounter';
 import UserMenu from 'components/userMenu';
 import TableComponent from 'components/Table';
+import SendUserMail from 'services/reducers/userPassword/userPassword-api-server';
 import schema from 'components/Input/validation';
-import addUserPassword from 'services/reducers/userPassword/userPassword-operations';
 import { IUser } from 'utils/types';
 import { EMPLOYEE_ROLE, ADD_USER_BUTTON_TEXT } from 'utils/texts-constants';
-import { useDispatch } from 'react-redux';
 import {
   StyledPage,
   StyledContent,
@@ -21,6 +21,7 @@ import {
   StyledWrapInput,
   StyledNotification,
 } from 'pages/userpage/ProfilePage/styles';
+import { FormValues } from 'services/reducers/userPassword/usePassword-types';
 
 // времено добавленный пользователь
 const user: IUser = {
@@ -29,15 +30,8 @@ const user: IUser = {
   role: 'superAdmin',
 };
 
-type FormValues = {
-  firstName: string;
-  lastName: string;
-  email: string;
-};
 const ProfilePage = () => {
   const { role } = user;
-
-  const dispatch = useDispatch();
 
   const {
     handleSubmit,
@@ -55,12 +49,13 @@ const ProfilePage = () => {
   });
   const onSubmit = (data: FormValues) => {
     const { firstName, lastName, email } = data;
-
-    dispatch(addUserPassword({
+    const userData = {
+      id: uuidv4(),
       firstName,
       lastName,
       email,
-    }));
+    };
+    SendUserMail(userData);
     reset();
   };
 
