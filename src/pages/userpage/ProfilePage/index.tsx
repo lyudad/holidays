@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+import LANG from 'lanuage/en';
 import InputComponent from 'components/Input';
 import ActionButton from 'components/ActionButton';
 import DaysCounter from 'components/DaysCounter';
@@ -18,8 +19,6 @@ import {
   StyledInfoSection,
   StyledButton,
   TableWraper,
-  StyledWrapInput,
-  StyledNotification,
 } from 'pages/userpage/ProfilePage/styles';
 import { FormValues } from 'services/reducers/userPassword/usePassword-types';
 
@@ -29,8 +28,7 @@ const user: IUser = {
   name: 'string',
   role: 'superAdmin',
 };
-
-const ProfilePage = () => {
+const ProfilePage: FunctionComponent = () => {
   const { role } = user;
 
   const {
@@ -66,38 +64,29 @@ const ProfilePage = () => {
         <StyledContent>
           <StyledInfoSection>
             <StyledInputWraper>
-              <StyledWrapInput>
-                <InputComponent
-                  name="firstName"
-                  control={control}
-                  rules={{ required: true }}
-                />
-                <StyledNotification>
-                  {errors.firstName?.message}
-                </StyledNotification>
-              </StyledWrapInput>
-              <StyledWrapInput>
-                <InputComponent
-                  name="lastName"
-                  control={control}
-                  rules={{ required: true }}
-                />
-                <StyledNotification>
-                  {errors.lastName?.message}
-                </StyledNotification>
-              </StyledWrapInput>
+              <InputComponent
+                name="firstName"
+                control={control}
+                rules={{ required: true }}
+                error={errors.firstName}
+                onText={LANG['first-name']}
+              />
+              <InputComponent
+                name="lastName"
+                control={control}
+                rules={{ required: true }}
+                onText={LANG['last-name']}
+                error={errors.lastName}
+              />
               {!(role === EMPLOYEE_ROLE) && (
                 <>
-                  <StyledWrapInput>
-                    <InputComponent
-                      name="email"
-                      control={control}
-                      rules={{ required: true }}
-                    />
-                    <StyledNotification>
-                      {errors.email?.message}
-                    </StyledNotification>
-                  </StyledWrapInput>
+                  <InputComponent
+                    name="email"
+                    control={control}
+                    rules={{ required: true }}
+                    error={errors.email}
+                    onText={LANG.email}
+                  />
                   <ActionButton>{ADD_USER_BUTTON_TEXT}</ActionButton>
                 </>
               )}
