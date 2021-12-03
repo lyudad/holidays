@@ -8,7 +8,7 @@ import ActionButton from 'components/ActionButton';
 import DaysCounter from 'components/DaysCounter';
 import UserMenu from 'components/userMenu';
 import TableComponent from 'components/Table';
-import SendUserMail from 'services/reducers/userPassword/userPassword-api-server';
+import sendUserMail from 'services/reducers/userPassword/userPassword-api-server';
 import schema from 'components/Input/validation';
 import { IUser } from 'utils/types';
 import { EMPLOYEE_ROLE, ADD_USER_BUTTON_TEXT } from 'utils/texts-constants';
@@ -53,7 +53,7 @@ const ProfilePage: FunctionComponent = () => {
       lastName,
       email,
     };
-    SendUserMail(userData);
+    sendUserMail(userData);
     reset();
   };
 

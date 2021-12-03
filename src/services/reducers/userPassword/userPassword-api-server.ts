@@ -3,7 +3,7 @@ import { UserValues } from './usePassword-types';
 
 axios.defaults.baseURL = 'http://localhost:3004';
 
-async function SendUserMail(data: UserValues) {
+async function sendUserMail(data: UserValues) {
   try {
     const response = await axios.post('/user', data);
     return response.data;
@@ -11,4 +11,4 @@ async function SendUserMail(data: UserValues) {
     return error;
   }
 }
-export default SendUserMail;
+export default sendUserMail;

@@ -24,7 +24,7 @@ function InputComponent<T extends FieldValues>({
       render={({ field: { onChange, value } }) => (
         <StyledInput>
           <Input
-            style={error && { boxShadow: '1px 1px 1px 0 red', border: '1px solid red' }}
+            style={error && { boxShadow: '0 0 0 2px rgba(245, 62, 39, 0.46)', border: '1px solid red' }}
             prefix={<UserOutlined />}
             placeholder={onText}
             value={value}
