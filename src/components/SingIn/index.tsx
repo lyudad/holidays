@@ -1,13 +1,35 @@
-/* eslint-disable no-console */
-import { Form, Button } from 'antd';
 import React, { FC } from 'react';
+import { Form, Button } from 'antd';
+// import type { RootState } from '../../store';
 import 'antd/dist/antd.css';
+import { useAppDispatch } from '../../utils/hooks';
 import { StyledForm, StyledInput, StyledMessage } from './styles';
 import { INPUT_MESSAGE } from './const';
 
+import { signIn } from '../../services/reducers/user/userSlice';
+import loginUser from '../../services/api/userApi';
+// import { IUser } from '../../utils/types';
+
+type ReturnUser = {
+
+  token: string
+  id: number;
+  first_name: string;
+  role: string;
+  is_blocked: string;
+
+};
 const Auth: FC = () => {
-  const onFinish = () => {
-    console.log('Success:');
+  // const user = useAppSelector((state: RootState) => state.user);
+  const dispatch = useAppDispatch();
+
+  const onFinish = async (values: any) => {
+    const userData = await loginUser(values);
+
+    const payload:ReturnUser = {
+      ...userData,
+    };
+    dispatch(signIn(payload));
   };
 
   const onFinishFailed = () => {
@@ -39,7 +61,7 @@ const Auth: FC = () => {
           },
         ]}
       >
-        <StyledInput placeholder="login" />
+        <StyledInput placeholder="login" id="email" />
       </Form.Item>
 
       <Form.Item

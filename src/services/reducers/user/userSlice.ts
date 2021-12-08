@@ -1,28 +1,33 @@
 /* eslint no-param-reassign: "off" */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IUser } from 'utils/types';
+import { ReturnUser } from 'utils/types';
+import type { RootState } from '../../../store';
 
-interface TUserState {
+export interface IUserState {
+  readonly userData: ReturnUser | null;
+  readonly token: null | string;
   readonly loggedIn: boolean;
-  readonly user: IUser | null;
 }
 
-const initialState: TUserState = {
+const initialState: IUserState = {
+  userData: null,
+  token: null,
   loggedIn: false,
-  user: null,
 };
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    signIn: (state, action: PayloadAction<{ user: IUser }>) => {
+    signIn: (state, action: PayloadAction< ReturnUser >) => {
+      state.userData = action.payload;
+      state.token = action.payload.token;
       state.loggedIn = true;
-      state.user = action.payload.user;
     },
     signOut: (state) => {
+      state.userData = null;
+      state.token = null;
       state.loggedIn = false;
-      state.user = null;
     },
   },
 });
@@ -31,5 +36,5 @@ export const {
   signIn,
   signOut,
 } = userSlice.actions;
-
+export const selectUser = (state: RootState) => state.user;
 export default userSlice.reducer;

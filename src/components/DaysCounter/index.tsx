@@ -1,5 +1,5 @@
 import React from 'react';
-import LANG from 'lanuage/en';
+import LANG from 'language/en';
 import { StyledSpan, StyledSpanWraper } from './styles';
 
 // получает целого юзера или ID и по нему забирает данные о количестве sickDays и vacationDays

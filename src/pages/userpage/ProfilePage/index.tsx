@@ -27,6 +27,7 @@ const user: IUser = {
   _id: 'qwe',
   name: 'string',
   role: 'superAdmin',
+  token: ' ',
 };
 
 // interface IFormInputs {
