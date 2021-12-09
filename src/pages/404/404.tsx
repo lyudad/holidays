@@ -1,16 +1,16 @@
 import React, { FC } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { StyledSection, Message, Button } from './styles';
 
 const NotFoundPage: FC = () => {
-  const history = useHistory();
-  const handleClick = () => {
-    history.goBack();
-  };
+  const navigate = useNavigate();
+
+  const goBack = () => navigate(-1);
+
   return (
     <StyledSection>
       <Message> Здесь нет ничего... </Message>
-      <Button onClick={handleClick}>Назад</Button>
+      <Button onClick={goBack}>Назад</Button>
     </StyledSection>
   );
 };

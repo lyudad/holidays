@@ -1,14 +1,15 @@
 import React, { FC } from 'react';
 import { Form, Button } from 'antd';
-// import type { RootState } from '../../store';
 import 'antd/dist/antd.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
+
 import { useAppDispatch } from '../../utils/hooks';
 import { StyledForm, StyledInput, StyledMessage } from './styles';
 import { INPUT_MESSAGE } from './const';
-
 import { signIn } from '../../services/reducers/user/userSlice';
 import API from '../../services/api/userApi';
-// import { IUser } from '../../utils/types';
 
 type ReturnUser = {
 
@@ -20,20 +21,27 @@ type ReturnUser = {
 
 };
 const Auth: FC = () => {
-  // const user = useAppSelector((state: RootState) => state.user);
+  // const { loggedIn } = useAppSelector((state) => state.user.loggedIn);
   const dispatch = useAppDispatch();
-
+  const navigate = useNavigate();
+  const notify = () => toast('some error');
   const onFinish = async (values: any) => {
     const userData = await API.loginUser(values);
-
+    if (!userData.id) {
+      notify();
+    }
     const payload:ReturnUser = {
       ...userData,
     };
     dispatch(signIn(payload));
+    navigate('/users/dash');
+    // if (loggedIn) {
+    //   navigate('/users/dash');
+    // }
   };
 
   const onFinishFailed = () => {
-    console.log('Failed:');
+    notify();
   };
 
   return (
@@ -86,6 +94,7 @@ const Auth: FC = () => {
           Sign in
         </Button>
       </Form.Item>
+      <ToastContainer />
     </StyledForm>
   );
 };
