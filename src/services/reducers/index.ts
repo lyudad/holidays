@@ -1,7 +1,7 @@
 import userReducer from './user/userSlice';
 
-const reducer = {
-  user: userReducer,
-};
+// const reducer = {
+//   user: userReducer,
+// };
 
-export default reducer;
+export default { userReducer };

@@ -7,7 +7,7 @@ import { StyledForm, StyledInput, StyledMessage } from './styles';
 import { INPUT_MESSAGE } from './const';
 
 import { signIn } from '../../services/reducers/user/userSlice';
-import loginUser from '../../services/api/userApi';
+import API from '../../services/api/userApi';
 // import { IUser } from '../../utils/types';
 
 type ReturnUser = {
@@ -24,7 +24,7 @@ const Auth: FC = () => {
   const dispatch = useAppDispatch();
 
   const onFinish = async (values: any) => {
-    const userData = await loginUser(values);
+    const userData = await API.loginUser(values);
 
     const payload:ReturnUser = {
       ...userData,

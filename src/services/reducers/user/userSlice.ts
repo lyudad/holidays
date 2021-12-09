@@ -1,4 +1,4 @@
-/* eslint no-param-reassign: "off" */
+/* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ReturnUser } from 'utils/types';
 import type { RootState } from '../../../store';
