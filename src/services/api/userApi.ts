@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { ILoginData } from '../reducers/user/api.types';
 
-axios.defaults.baseURL = 'http://localhost:3030';
+axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
 const jwtToken = {
   set(token:string) {
@@ -34,8 +34,6 @@ async function logoutUser() {
     return error;
   }
 }
-// async function fetchCurrentUser(token:string): Promise<ReturnUser> {
 
-// }
 const API = { loginUser, logoutUser };
 export default API;

@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch } from '../../utils/hooks';
 import { StyledForm, StyledInput, StyledMessage } from './styles';
-import { INPUT_MESSAGE } from './const';
+import INPUT_MESSAGE from './const';
 import { signIn } from '../../services/reducers/user/userSlice';
 import API from '../../services/api/userApi';
 import { EMPLOYEE_ROLE, LOGIN_ERROR } from '../../utils/texts-constants';
@@ -22,7 +22,6 @@ type ReturnUser = {
 
 };
 const Auth: FC = () => {
-  // const { loggedIn } = useAppSelector((state) => state.user.loggedIn);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const notify = () => toast(LOGIN_ERROR);
