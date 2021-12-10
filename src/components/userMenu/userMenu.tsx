@@ -4,10 +4,6 @@ import { StyledContainer, StyledMenu } from 'components/userMenu/styles';
 import LANG from 'language/en';
 import { IUser } from 'utils/types';
 
-// добавить обработчик на клик по кнопке, который будет переводить на соответствующие страницы ;
-
-// получаем роль у user  нам нужна именно роль, а не доступы
-
 const getUserRole = (user: IUser) => user.role;
 
 function UserMenu(user: IUser) {
