@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import {
-  Navigate, useLocation,
+  useNavigate,
 } from 'react-router-dom';
 import { useAppSelector } from 'utils/hooks';
 
@@ -9,13 +9,15 @@ export interface Props {
   children: React.ReactNode
 }
 const RequireAuth: FC<Props> = ({ children }):any => {
-  const location = useLocation();
+  const navigate = useNavigate();
+  // const location = useLocation();
   const { loggedIn } = useAppSelector((state) => state.user.loggedIn);
+  // const { token } = useAppSelector((state) => state.user.token);
 
   const auth = loggedIn;
 
-  if (auth) {
-    return <Navigate to="/" state={{ from: location }} />;
+  if (auth === false) {
+    return navigate('/');
   }
 
   return children;

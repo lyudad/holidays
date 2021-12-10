@@ -10,6 +10,7 @@ import { StyledForm, StyledInput, StyledMessage } from './styles';
 import { INPUT_MESSAGE } from './const';
 import { signIn } from '../../services/reducers/user/userSlice';
 import API from '../../services/api/userApi';
+import { EMPLOYEE_ROLE } from '../../utils/texts-constants';
 
 type ReturnUser = {
 
@@ -25,21 +26,27 @@ const Auth: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const notify = () => toast('some error');
+
+  const toNextPage = (role:string):void => {
+    if (role === EMPLOYEE_ROLE) {
+      navigate('/userpage');
+    }
+    navigate('/users/dash');
+  };
   const onFinish = async (values: any) => {
     const userData = await API.loginUser(values);
     if (!userData.id) {
       notify();
+      return;
     }
+    const { role } = userData;
     const payload:ReturnUser = {
       ...userData,
     };
     dispatch(signIn(payload));
-    navigate('/users/dash');
-    // if (loggedIn) {
-    //   navigate('/users/dash');
-    // }
-  };
 
+    toNextPage(role);
+  };
   const onFinishFailed = () => {
     notify();
   };
