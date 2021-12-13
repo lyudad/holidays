@@ -32,7 +32,7 @@ const Auth: FC = () => {
     }
     navigate('/users/dash');
   };
-  const onFinish = async (values: any) => {
+  const onFinish = async (values: any):Promise<void> => {
     const userData = await API.loginUser(values);
     if (!userData.id) {
       notify();

@@ -14,7 +14,6 @@ const RequireAuth: FC<Props> = ({ children }):any => {
   const { loggedIn } = useAppSelector((state) => state.user.loggedIn);
 
   const auth = loggedIn;
-  // console.log(loggedIn);
   if (auth === false) {
     return navigate('/');
   }
