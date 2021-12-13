@@ -2,33 +2,44 @@ import React from 'react';
 import { Menu } from 'antd';
 import { StyledContainer, StyledMenu } from 'components/userMenu/styles';
 import LANG from 'language/en';
-import { IUser } from 'utils/types';
+import { employee } from 'components/userMenu/constants';
+import { useAppSelector, useAppDispatch } from 'utils/hooks';
+import { Link } from 'react-router-dom';
+import { signOut } from 'services/reducers/user/userSlice';
 
-// добавить обработчик на клик по кнопке, который будет переводить на соответствующие страницы ;
+function UserMenu() {
+  const dispatch = useAppDispatch();
+  const role:string = useAppSelector((state) => state.user.userData.role);
 
-// получаем роль у user  нам нужна именно роль, а не доступы
-
-const getUserRole = (user: IUser) => user.role;
-
-function UserMenu(user: IUser) {
-  const MenuOptions = {
-    superAdmin: [LANG.dashboard, LANG.users, LANG.logout],
-    hrAdmin: [LANG.users, LANG.logout],
-    employee: [LANG.profile, LANG.logout],
-  };
-  const role = getUserRole(user);
-  const handleClick = (e: React.HTMLProps<HTMLButtonElement>) => {
-    // eslint-disable-next-line no-console
-    console.log('click ', e);
+  const onClick = () => {
+    dispatch(signOut());
+    localStorage.removeItem('user');
   };
   return (
     <StyledContainer>
       <StyledMenu>
-        { MenuOptions[role].map((el: string) => (
-          <Menu.Item key={el} onClick={handleClick}>
-            {el}
-          </Menu.Item>
-        ))}
+        {(!role) && <Link to="/">{LANG.singIn}</Link>}
+        {(role === employee) ? (
+          <>
+            <Menu.Item key={LANG.profile}>
+              <Link to="/userpage">{LANG.profile}</Link>
+            </Menu.Item>
+          </>
+        ) : null }
+        {role !== employee ? (
+          <>
+            <Menu.Item key={LANG.dashboard}>
+              <Link to="/users/dash">{LANG.dashboard}</Link>
+            </Menu.Item>
+            <Menu.Item key={LANG.users}>
+              <Link to="/users">{LANG.users}</Link>
+              {LANG.users}
+            </Menu.Item>
+          </>
+        ) : null }
+        <Menu.Item key={LANG.logout} onClick={onClick}>
+          <Link to="/">{LANG.logout}</Link>
+        </Menu.Item>
       </StyledMenu>
     </StyledContainer>
   );

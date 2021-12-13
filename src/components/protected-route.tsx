@@ -1,25 +1,24 @@
 import React, { FC } from 'react';
-import { Redirect, Route, RouteProps } from 'react-router-dom';
-import useAppSelector from 'utils/hooks';
+import {
+  useNavigate,
+} from 'react-router-dom';
+import { useAppSelector } from 'utils/hooks';
 
-const ProtectedRoute: FC<RouteProps> = ({ path, children, ...rest }) => {
-  const { loggedIn } = useAppSelector((state) => state.user);
-  return (
-    <Route
-      path={path}
-      {...rest}
-      render={({ location }) => (loggedIn ? (
-        children
-      ) : (
-        <Redirect
-          to={{
-            pathname: '/login',
-            state: { from: location },
-          }}
-        />
-      ))}
-    />
-  );
+export interface Props {
+  title?: string
+  children: React.ReactNode
+}
+const RequireAuth: FC<Props> = ({ children }):any => {
+  const navigate = useNavigate();
+
+  const { loggedIn } = useAppSelector((state) => state.user.loggedIn);
+
+  const auth = loggedIn;
+  if (auth === false) {
+    return navigate('/');
+  }
+
+  return children;
 };
 
-export default ProtectedRoute;
+export default RequireAuth;

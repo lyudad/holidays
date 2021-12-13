@@ -1,12 +1,7 @@
 import React from 'react';
-import LANG from 'lanuage/en';
-import { StyledSpan, StyledSpanWraper } from './styles';
+import LANG from 'language/en';
+import { StyledSpan, StyledSpanWraper } from 'components/DaysCounter/styles';
 
-// получает целого юзера или ID и по нему забирает данные о количестве sickDays и vacationDays
-// type State = {
-//   sickDays: number;
-//   vacationDays: number;
-// };
 interface Props {
   sickDays: number;
   vacationDays: number;

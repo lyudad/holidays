@@ -1,17 +1,53 @@
-/* eslint-disable no-console */
-import { Form, Button } from 'antd';
 import React, { FC } from 'react';
+import { Form, Button } from 'antd';
 import 'antd/dist/antd.css';
-import { StyledForm, StyledInput, StyledMessage } from './styles';
-import { INPUT_MESSAGE } from './const';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from 'utils/hooks';
+import { StyledForm, StyledInput, StyledMessage } from 'components/SingIn/styles';
+import INPUT_MESSAGE from 'components/SingIn//const';
+import { signIn } from 'services/reducers/user/userSlice';
+import API from 'services/api/userApi';
+import { EMPLOYEE_ROLE, LOGIN_ERROR } from 'utils/texts-constants';
 
+type ReturnUser = {
+
+  token: string
+  id: number;
+  first_name: string;
+  role: string;
+  is_blocked: string;
+
+};
 const Auth: FC = () => {
-  const onFinish = () => {
-    console.log('Success:');
-  };
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const notify = () => toast(LOGIN_ERROR);
 
-  const onFinishFailed = () => {
-    console.log('Failed:');
+  const toNextPage = (role:string):void => {
+    if (role === EMPLOYEE_ROLE) {
+      navigate('/userpage');
+      return;
+    }
+    navigate('/users/dash');
+  };
+  const onFinish = async (values: any):Promise<void> => {
+    const userData = await API.loginUser(values);
+    if (!userData.id) {
+      notify();
+      return;
+    }
+    const { role } = userData;
+    const payload:ReturnUser = {
+      ...userData,
+    };
+    dispatch(signIn(payload));
+
+    toNextPage(role);
+  };
+  const onFinishFailed = ():void => {
+    notify();
   };
 
   return (
@@ -39,7 +75,7 @@ const Auth: FC = () => {
           },
         ]}
       >
-        <StyledInput placeholder="login" />
+        <StyledInput placeholder="login" id="email" />
       </Form.Item>
 
       <Form.Item
@@ -64,6 +100,7 @@ const Auth: FC = () => {
           Sign in
         </Button>
       </Form.Item>
+      <ToastContainer />
     </StyledForm>
   );
 };

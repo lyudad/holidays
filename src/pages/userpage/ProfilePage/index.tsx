@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import LANG from 'lanuage/en';
+import LANG from 'language/en';
 import InputComponent from 'components/Input';
 import ActionButton from 'components/ActionButton';
 import DaysCounter from 'components/DaysCounter';
@@ -27,6 +27,7 @@ const user: IUser = {
   _id: 'qwe',
   name: 'string',
   role: 'superAdmin',
+  token: ' ',
 };
 const ProfilePage: FunctionComponent = () => {
   const { role } = user;
@@ -60,7 +61,7 @@ const ProfilePage: FunctionComponent = () => {
   return (
     <>
       <StyledPage>
-        <UserMenu {...user} />
+        <UserMenu />
         <StyledContent>
           <StyledInfoSection>
             <StyledInputWraper>

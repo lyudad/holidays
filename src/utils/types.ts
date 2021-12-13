@@ -4,7 +4,15 @@ export interface IUser {
   _id: string;
   name: string;
   role: TUserRole;
+  token: null | string;
 }
+export type ReturnUser = {
+  token: string;
+  id: number;
+  first_name: string;
+  role: string;
+  is_blocked: string;
+};
 
 export interface IPermissionsSet {
   readonly canDeclineDaysOff?: boolean;
