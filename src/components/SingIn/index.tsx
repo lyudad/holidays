@@ -46,7 +46,7 @@ const Auth: FC = () => {
 
     toNextPage(role);
   };
-  const onFinishFailed = () => {
+  const onFinishFailed = ():void => {
     notify();
   };
 
