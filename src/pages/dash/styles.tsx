@@ -13,3 +13,15 @@ export const DashForm = styled.div`
   flex-direction: column;
   justify-content: center;
 `;
+export const StyledPage = styled.div`
+width:100%;
+display:flex;
+margin: 0;
+`;
+
+export const StyledContent = styled.div`
+width:100%;
+display: flex;
+flex-wrap: wrap;
+padding-top: 100px;
+`;

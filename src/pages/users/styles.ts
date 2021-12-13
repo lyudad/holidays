@@ -35,3 +35,15 @@ export const ContentWrap = styled.div`
 export const StyledTable = styled(Table)`
   ${tableBorders}
 `;
+export const StyledPage = styled.div`
+width:100%;
+display:flex;
+margin: 0;
+`;
+
+export const StyledContent = styled.div`
+width:100%;
+display: flex;
+flex-wrap: wrap;
+padding-top: 100px;
+`;
