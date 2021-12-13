@@ -10,7 +10,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import userReducer from './services/reducers/user/userSlice';
+import userReducer from 'services/reducers/user/userSlice';
 
 const userPersistConfig = {
   key: 'user',

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ILoginData } from '../reducers/user/api.types';
+import { ILoginData } from 'services/reducers/user/api.types';
 
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 

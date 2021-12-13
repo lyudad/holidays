@@ -10,12 +10,11 @@ export interface Props {
 }
 const RequireAuth: FC<Props> = ({ children }):any => {
   const navigate = useNavigate();
-  // const location = useLocation();
+
   const { loggedIn } = useAppSelector((state) => state.user.loggedIn);
-  // const { token } = useAppSelector((state) => state.user.token);
 
   const auth = loggedIn;
-
+  // console.log(loggedIn);
   if (auth === false) {
     return navigate('/');
   }

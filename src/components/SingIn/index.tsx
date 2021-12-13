@@ -4,13 +4,12 @@ import 'antd/dist/antd.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
-
-import { useAppDispatch } from '../../utils/hooks';
-import { StyledForm, StyledInput, StyledMessage } from './styles';
-import INPUT_MESSAGE from './const';
-import { signIn } from '../../services/reducers/user/userSlice';
-import API from '../../services/api/userApi';
-import { EMPLOYEE_ROLE, LOGIN_ERROR } from '../../utils/texts-constants';
+import { useAppDispatch } from 'utils/hooks';
+import { StyledForm, StyledInput, StyledMessage } from 'components/SingIn/styles';
+import INPUT_MESSAGE from 'components/SingIn//const';
+import { signIn } from 'services/reducers/user/userSlice';
+import API from 'services/api/userApi';
+import { EMPLOYEE_ROLE, LOGIN_ERROR } from 'utils/texts-constants';
 
 type ReturnUser = {
 

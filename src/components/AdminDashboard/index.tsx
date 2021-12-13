@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-no-bind */
 import React from 'react';
 import { Table } from 'antd';
-import FormTable from './styles';
+import FormTable from 'components/AdminDashboard/styles';
 
 type Props = {};
 

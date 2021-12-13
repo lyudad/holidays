@@ -1,7 +1,7 @@
 const LANG = {
   super: 'superAdmin',
-  user: 'employee',
-  admin: 'hr',
+  employee: 'employee',
+  hr: 'hr',
   dashboard: 'Dashboard',
   profile: 'Profile',
   users: 'Users',
@@ -13,6 +13,7 @@ const LANG = {
   vacationDay: 'vacation day',
   vacationDays: 'vacation days',
   email: 'email',
+  singIn: 'Please sign in',
 };
 
 export default LANG;

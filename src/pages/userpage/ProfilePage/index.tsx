@@ -61,7 +61,7 @@ const ProfilePage: FunctionComponent = () => {
   return (
     <>
       <StyledPage>
-        <UserMenu {...user} />
+        <UserMenu />
         <StyledContent>
           <StyledInfoSection>
             <StyledInputWraper>

@@ -1,6 +1,6 @@
 import React from 'react';
 import LANG from 'language/en';
-import { StyledSpan, StyledSpanWraper } from './styles';
+import { StyledSpan, StyledSpanWraper } from 'components/DaysCounter/styles';
 
 interface Props {
   sickDays: number;

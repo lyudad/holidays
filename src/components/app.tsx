@@ -6,7 +6,7 @@ import ProfilePage from 'pages/userpage/ProfilePage';
 import UsersPage from 'pages/users';
 import React, { FC } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import RequireAuth from './protected-route';
+import RequireAuth from 'components/protected-route';
 
 const App: FC = () => (
   <>

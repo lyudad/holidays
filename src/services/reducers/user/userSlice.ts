@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ReturnUser } from 'utils/types';
-import type { RootState } from '../../../store';
+import type { RootState } from 'store';
 
 export interface IUserState {
   readonly userData: ReturnUser | null;
