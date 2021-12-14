@@ -1,10 +1,10 @@
 import React, { FC, useEffect, useState } from 'react';
 import { ColumnsType } from 'antd/es/table';
-import { store } from 'store';
+import getUserList from 'services/api/userlistApi';
 import ActionButton from 'components/ActionButton';
 import UserMenu from 'components/userMenu';
+import { store } from 'store';
 import { ADD_USER_BUTTON_TEXT, SUPER_ADMIN_ROLE } from 'utils/texts-constants';
-import getUserList from '../../services/api/userlistApi';
 import { deleteUser, editUser, toggleUser } from './users-btn-logic';
 import {
   StyledPage,

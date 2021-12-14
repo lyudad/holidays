@@ -50,9 +50,9 @@ padding-top: 100px;
 export const StyledName = styled.p`
  display: inline-block;
  margin-right: 5px;
- color: ${(props): any => props.color && 'grey'};
+ color: ${(props): string | undefined => props.color && 'grey'};
 `;
 
 export const StyledActionButton = styled(ActionButton)`
- color: ${(props): any => props.color && 'grey'};
+ color: ${(props): string | undefined => props.color && 'grey'};
 `;
