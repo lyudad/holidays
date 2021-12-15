@@ -25,8 +25,22 @@ interface User {
 
 const UsersPage: FC = () => {
   const [users, setUsers] = useState<User[]>([]);
-  const [role, setRole] = useState<string>('');
 
+  const userRole = store.getState().user.userData.role;
+
+  useEffect(() => {
+    const token = {
+      token: store.getState().user.token,
+    };
+
+    getUserList(token).then((data) => {
+      if (data.length === 0) {
+        return;
+      }
+      setUsers(data);
+      // eslint-disable-next-line no-console
+    }).catch((error) => console.log(error));
+  }, []);
   const superAdminTableColumns: ColumnsType<any> = [{
     title: 'Name',
     width: '50%',
@@ -54,27 +68,11 @@ const UsersPage: FC = () => {
     dataIndex: 'is_blocked',
     render: (is_blocked) => (
       <>
-        {role === SUPER_ADMIN_ROLE ? <StyledActionButton type="text" size="middle" color={is_blocked} onClick={() => deleteUser(is_blocked)}>Delete</StyledActionButton> : <StyledActionButton type="text" size="middle" color={is_blocked} onClick={() => toggleUser(is_blocked)}>{is_blocked ? 'Block' : 'Unblock'}</StyledActionButton>}
+        {userRole === SUPER_ADMIN_ROLE ? <StyledActionButton type="text" size="middle" color={is_blocked} onClick={() => deleteUser(is_blocked)}>Delete</StyledActionButton> : <StyledActionButton type="text" size="middle" color={is_blocked} onClick={() => toggleUser(is_blocked)}>{is_blocked ? 'Block' : 'Unblock'}</StyledActionButton>}
       </>
     ),
   },
   ];
-  useEffect(() => {
-    const userRole = store.getState().user.userData.role;
-    setRole(userRole);
-
-    const token = {
-      token: store.getState().user.token,
-    };
-
-    getUserList(token).then((data) => {
-      if (data.length === 0) {
-        return;
-      }
-      setUsers(data);
-      // eslint-disable-next-line no-console
-    }).catch((error) => console.log(error));
-  }, []);
 
   return (
     <StyledPage>
