@@ -39,6 +39,7 @@ const UsersPage: FC = () => {
     const token = {
       token: store.getState().user.token,
     };
+
     getUserList(token).then((data) => {
       if (data.length === 0) {
         return;
@@ -48,14 +49,12 @@ const UsersPage: FC = () => {
       // eslint-disable-next-line no-console
     }).catch((error) => console.log(error));
   }, []);
-
-  useEffect(() => {
+   useEffect(() => {
     const findUsers = filteredUsers.filter(
       (user: User) => user.last_name.toLocaleLowerCase().includes(filter.toLowerCase()),
     );
     setUsers(findUsers);
   }, [filter, filteredUsers]);
-
   const superAdminTableColumns: ColumnsType<any> = [{
     title: 'Name',
     width: '50%',
@@ -88,7 +87,6 @@ const UsersPage: FC = () => {
     ),
   },
   ];
-
   const onChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const currentData = evt.currentTarget.value;
     setFilter(currentData);
