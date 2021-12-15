@@ -1,5 +1,8 @@
-import React, { FC, useEffect, useState } from 'react';
-import { Input } from 'antd';
+import React, {
+  FC,
+  useEffect,
+  useState,
+} from 'react';
 import { ColumnsType } from 'antd/es/table';
 import getUserList from 'services/api/userlistApi';
 import ActionButton from 'components/ActionButton';
@@ -15,6 +18,8 @@ import {
   StyledTable,
   StyledActionButton,
   StyledName,
+  WrapperSet,
+  StyledFilter,
 } from './styles';
 
 interface User {
@@ -27,8 +32,29 @@ interface User {
 const UsersPage: FC = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
-  const [role, setRole] = useState<string>('');
   const [filter, setFilter] = useState<string>('');
+  const userRole = store.getState().user.userData.role;
+
+  useEffect(() => {
+    const token = {
+      token: store.getState().user.token,
+    };
+    getUserList(token).then((data) => {
+      if (data.length === 0) {
+        return;
+      }
+      setUsers(data);
+      setFilteredUsers(data);
+      // eslint-disable-next-line no-console
+    }).catch((error) => console.log(error));
+  }, []);
+
+  useEffect(() => {
+    const findUsers = filteredUsers.filter(
+      (user: User) => user.last_name.toLocaleLowerCase().includes(filter.toLowerCase()),
+    );
+    setUsers(findUsers);
+  }, [filter, filteredUsers]);
 
   const superAdminTableColumns: ColumnsType<any> = [{
     title: 'Name',
@@ -57,43 +83,15 @@ const UsersPage: FC = () => {
     dataIndex: 'is_blocked',
     render: (is_blocked) => (
       <>
-        {role === SUPER_ADMIN_ROLE ? <StyledActionButton type="text" size="middle" color={is_blocked} onClick={() => deleteUser(is_blocked)}>Delete</StyledActionButton> : <StyledActionButton type="text" size="middle" color={is_blocked} onClick={() => toggleUser(is_blocked)}>{is_blocked ? 'Block' : 'Unblock'}</StyledActionButton>}
+        {userRole === SUPER_ADMIN_ROLE ? <StyledActionButton type="text" size="middle" color={is_blocked} onClick={() => deleteUser(is_blocked)}>Delete</StyledActionButton> : <StyledActionButton type="text" size="middle" color={is_blocked} onClick={() => toggleUser(is_blocked)}>{is_blocked ? 'Block' : 'Unblock'}</StyledActionButton>}
       </>
     ),
   },
   ];
-  useEffect(() => {
-    const userRole = store.getState().user.userData.role;
-    setRole(userRole);
-    const token = {
-      token: store.getState().user.token,
-    };
-    getUserList(token).then((data) => {
-      if (data.length === 0) {
-        return;
-      }
-      setUsers(data);
-      setFilteredUsers(data);
-      // eslint-disable-next-line no-console
-    }).catch((error) => console.log(error));
-  }, []);
 
-  const onChange = (evt: any) => {
-    // eslint-disable-next-line no-console
-    // console.log(evt.currentTarget.value, 'evt');
+  const onChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const currentData = evt.currentTarget.value;
     setFilter(currentData);
-    const findUsers = users.filter(
-      (user: any) => user.first_name.toLocaleLowerCase().includes(filter.toLowerCase()),
-    );
-    // return contacts.filter(contact =>
-    //   contact.name.toLocaleLowerCase().includes(filter.toLowerCase()),
-    // );
-    // first_name.toLocaleLowerCase().includes(filter.toLowerCase());
-    setFilteredUsers(findUsers);
-
-    // eslint-disable-next-line no-console
-    console.log(findUsers, 'evt');
   };
 
   return (
@@ -101,34 +99,36 @@ const UsersPage: FC = () => {
       <UserMenu />
 
       <StyledMain>
-        <Input
-          type="text"
-          value={filter}
-          name="filter"
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
-          required
-          onChange={onChange}
-        />
-        <ButtonWrap>
-          <ActionButton
-            block
-            type="default"
-            shape="round"
-            size="large"
-            // eslint-disable-next-line no-console
-            onClick={() => console.log('add another user cb')}
-          >
-            {ADD_USER_BUTTON_TEXT}
-          </ActionButton>
-        </ButtonWrap>
+        <WrapperSet>
+          <StyledFilter
+            type="text"
+            value={filter}
+            name="filter"
+            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
+            required
+            onChange={onChange}
+          />
+          <ButtonWrap>
+            <ActionButton
+              block
+              type="default"
+              shape="round"
+              size="large"
+              // eslint-disable-next-line no-console
+              onClick={() => console.log('add another user cb')}
+            >
+              {ADD_USER_BUTTON_TEXT}
+            </ActionButton>
+          </ButtonWrap>
+        </WrapperSet>
         <ContentWrap>
           {users.length > 0
               && (
                 <StyledTable
                   bordered
                   rowKey={(record: any): number => record.user_id}
-                  dataSource={filteredUsers}
+                  dataSource={users}
                   columns={superAdminTableColumns}
                   pagination={{
                     hideOnSinglePage: true,
