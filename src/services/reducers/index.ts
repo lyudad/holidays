@@ -1,7 +1,3 @@
-import userReducer from './user/userSlice';
+import userReducer from 'services/reducers/user/userSlice';
 
-const reducer = {
-  user: userReducer,
-};
-
-export default reducer;
+export default { userReducer };

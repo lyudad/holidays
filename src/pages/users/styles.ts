@@ -6,11 +6,11 @@ import {
   buttonBorder,
   tableBorders,
 } from 'utils/css-constants';
+import ActionButton from 'components/ActionButton';
 
 export const StyledMain = styled.main`
   width: clamp(320px, 100%, 1440px);
   margin: 0 auto;
-  height: 100vh;
   display: flex;
   padding: 20px;
   align-items: center;
@@ -34,4 +34,25 @@ export const ContentWrap = styled.div`
 
 export const StyledTable = styled(Table)`
   ${tableBorders}
+`;
+export const StyledPage = styled.div`
+width:100%;
+display:flex;
+margin: 0;
+`;
+
+export const StyledContent = styled.div`
+width:100%;
+display: flex;
+flex-wrap: wrap;
+padding-top: 100px;
+`;
+export const StyledName = styled.p`
+ display: inline-block;
+ margin-right: 5px;
+ color: ${(props): string | undefined => props.color && 'grey'};
+`;
+
+export const StyledActionButton = styled(ActionButton)`
+ color: ${(props): string | undefined => props.color && 'grey'};
 `;

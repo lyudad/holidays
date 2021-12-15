@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { StyledMain, Message } from './styles';
+import { StyledMain, Message } from 'pages/home/styles';
 
 const HomePage: FC = () => (
   <StyledMain>
