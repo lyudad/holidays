@@ -2,6 +2,7 @@ const LANG = {
   super: 'superAdmin',
   employee: 'employee',
   hr: 'hr',
+  role: 'role',
   dashboard: 'Dashboard',
   profile: 'Profile',
   users: 'Users',
@@ -14,6 +15,7 @@ const LANG = {
   vacationDays: 'vacation days',
   email: 'email',
   singIn: 'Please sign in',
+  addNewUser: 'Enter new user data',
 };
 
 export default LANG;
