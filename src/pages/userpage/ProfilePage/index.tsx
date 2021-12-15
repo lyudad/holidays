@@ -7,7 +7,7 @@ import ActionButton from 'components/ActionButton';
 import DaysCounter from 'components/DaysCounter';
 import UserMenu from 'components/userMenu';
 import TableComponent from 'components/Table';
-import sendUserMail from 'services/reducers/userPassword/userPassword-api-server';
+import sendUserMail from 'services/api/userPasswordApi';
 import schema from 'components/Input/validation';
 import { IUser } from 'utils/types';
 import { EMPLOYEE_ROLE, ADD_USER_BUTTON_TEXT } from 'utils/texts-constants';
@@ -19,7 +19,7 @@ import {
   StyledButton,
   TableWraper,
 } from 'pages/userpage/ProfilePage/styles';
-import { FormValues } from 'services/reducers/userPassword/usePassword-types';
+import { FormValues } from 'pages/userpage/ProfilePage/usePassword-types';
 
 // времено добавленный пользователь
 const user: IUser = {
@@ -33,7 +33,6 @@ const ProfilePage: FunctionComponent = () => {
 
   const {
     handleSubmit,
-    // reset,
     control,
     formState: { errors },
   } = useForm<FormValues>({
@@ -47,15 +46,12 @@ const ProfilePage: FunctionComponent = () => {
   });
   const onSubmit = (data: FormValues) => {
     const { firstName, lastName, email } = data;
-    // eslint-disable-next-line no-console
-    console.log(data);
     const userData = {
       first_name: firstName,
       last_name: lastName,
       email,
     };
     sendUserMail(userData);
-    // reset();
   };
 
   return (

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SendValues } from './usePassword-types';
+import { SendValues } from 'pages/userpage/ProfilePage/usePassword-types';
 
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
