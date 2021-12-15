@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import LANG from 'language/en';
@@ -34,7 +33,7 @@ const ProfilePage: FunctionComponent = () => {
 
   const {
     handleSubmit,
-    reset,
+    // reset,
     control,
     formState: { errors },
   } = useForm<FormValues>({
@@ -48,14 +47,15 @@ const ProfilePage: FunctionComponent = () => {
   });
   const onSubmit = (data: FormValues) => {
     const { firstName, lastName, email } = data;
+    // eslint-disable-next-line no-console
+    console.log(data);
     const userData = {
-      id: uuidv4(),
-      firstName,
-      lastName,
+      first_name: firstName,
+      last_name: lastName,
       email,
     };
     sendUserMail(userData);
-    reset();
+    // reset();
   };
 
   return (
