@@ -1,4 +1,8 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, {
+  FC,
+  useEffect,
+  useState,
+} from 'react';
 import { ColumnsType } from 'antd/es/table';
 import getUserList from 'services/api/userlistApi';
 import ActionButton from 'components/ActionButton';
@@ -14,6 +18,8 @@ import {
   StyledTable,
   StyledActionButton,
   StyledName,
+  WrapperSet,
+  StyledFilter,
 } from './styles';
 
 interface User {
@@ -25,7 +31,8 @@ interface User {
 
 const UsersPage: FC = () => {
   const [users, setUsers] = useState<User[]>([]);
-
+  const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
+  const [filter, setFilter] = useState<string>('');
   const userRole = store.getState().user.userData.role;
 
   useEffect(() => {
@@ -38,9 +45,16 @@ const UsersPage: FC = () => {
         return;
       }
       setUsers(data);
+      setFilteredUsers(data);
       // eslint-disable-next-line no-console
     }).catch((error) => console.log(error));
   }, []);
+   useEffect(() => {
+    const findUsers = filteredUsers.filter(
+      (user: User) => user.last_name.toLocaleLowerCase().includes(filter.toLowerCase()),
+    );
+    setUsers(findUsers);
+  }, [filter, filteredUsers]);
   const superAdminTableColumns: ColumnsType<any> = [{
     title: 'Name',
     width: '50%',
@@ -73,24 +87,39 @@ const UsersPage: FC = () => {
     ),
   },
   ];
+  const onChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    const currentData = evt.currentTarget.value;
+    setFilter(currentData);
+  };
 
   return (
     <StyledPage>
       <UserMenu />
 
       <StyledMain>
-        <ButtonWrap>
-          <ActionButton
-            block
-            type="default"
-            shape="round"
-            size="large"
-            // eslint-disable-next-line no-console
-            onClick={() => console.log('add another user cb')}
-          >
-            {ADD_USER_BUTTON_TEXT}
-          </ActionButton>
-        </ButtonWrap>
+        <WrapperSet>
+          <StyledFilter
+            type="text"
+            value={filter}
+            name="filter"
+            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
+            required
+            onChange={onChange}
+          />
+          <ButtonWrap>
+            <ActionButton
+              block
+              type="default"
+              shape="round"
+              size="large"
+              // eslint-disable-next-line no-console
+              onClick={() => console.log('add another user cb')}
+            >
+              {ADD_USER_BUTTON_TEXT}
+            </ActionButton>
+          </ButtonWrap>
+        </WrapperSet>
         <ContentWrap>
           {users.length > 0
               && (
