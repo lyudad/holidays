@@ -6,6 +6,8 @@ import
 import LANG from 'language/en';
 import { useAppSelector } from 'utils/hooks';
 import { SUPER_ADMIN_ROLE } from 'utils/texts-constants';
+import API from 'services/api/userApi';
+import { ICreateUser } from 'services/reducers/user/api.types';
 
 const layout = {
   labelCol: {
@@ -26,8 +28,10 @@ const AddUserForm = () => {
   const [form] = Form.useForm();
   const role: string = useAppSelector((state) => state.user.userData.role);
   const showRole = (role === SUPER_ADMIN_ROLE);
-  const onFinish = (values:string) => {
-    console.log(values);
+  const onFinish = async (values:ICreateUser) => {
+    const result = await API.addNewUser(values);
+    form.resetFields();
+    return result;
   };
 
   const onReset = () => {
@@ -37,7 +41,7 @@ const AddUserForm = () => {
   return (
     <Form {...layout} form={form} name="control-hooks" onFinish={onFinish}>
       <Form.Item
-        name={LANG['first-name']}
+        name="first_name"
         label={LANG['first-name']}
         rules={[
           {
@@ -48,7 +52,7 @@ const AddUserForm = () => {
         <Input />
       </Form.Item>
       <Form.Item
-        name={LANG['last-name']}
+        name="last_name"
         label={LANG['last-name']}
         rules={[
           {
@@ -59,7 +63,7 @@ const AddUserForm = () => {
         <Input />
       </Form.Item>
       <Form.Item
-        name={LANG.email}
+        name="email"
         label={LANG.email}
         rules={[
           {

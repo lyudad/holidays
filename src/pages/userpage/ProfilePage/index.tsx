@@ -15,10 +15,10 @@ import { EMPLOYEE_ROLE, ADD_USER_BUTTON_TEXT } from 'utils/texts-constants';
 import {
   StyledPage,
   StyledContent,
-  StyledInputWraper,
+  StyledInputWrapper,
   StyledInfoSection,
   StyledButton,
-  TableWraper,
+  TableWrapper,
 } from 'pages/userpage/ProfilePage/styles';
 import { FormValues } from 'services/reducers/userPassword/usePassword-types';
 
@@ -64,7 +64,7 @@ const ProfilePage: FunctionComponent = () => {
         <UserMenu />
         <StyledContent>
           <StyledInfoSection>
-            <StyledInputWraper>
+            <StyledInputWrapper>
               <InputComponent
                 name="firstName"
                 control={control}
@@ -91,13 +91,13 @@ const ProfilePage: FunctionComponent = () => {
                   <ActionButton>{ADD_USER_BUTTON_TEXT}</ActionButton>
                 </>
               )}
-            </StyledInputWraper>
+            </StyledInputWrapper>
             <DaysCounter sickDays={5} vacationDays={15} />
             <StyledButton>
               <ActionButton
                 onClick={(): void => {
                   // eslint-disable-next-line no-console
-                  console.log('cliked');
+                  console.log('clicked');
                 }}
               >
                 Add
@@ -113,9 +113,9 @@ const ProfilePage: FunctionComponent = () => {
               )}
             </StyledButton>
           </StyledInfoSection>
-          <TableWraper>
+          <TableWrapper>
             <TableComponent />
-          </TableWraper>
+          </TableWrapper>
         </StyledContent>
       </StyledPage>
     </>
