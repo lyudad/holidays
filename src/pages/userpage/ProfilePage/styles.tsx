@@ -1,4 +1,3 @@
-/* eslint-disable eol-last */
 import ActionButton from 'components/ActionButton';
 import styled from 'styled-components';
 
