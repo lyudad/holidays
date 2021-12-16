@@ -1,4 +1,5 @@
 /* eslint-disable eol-last */
+import ActionButton from 'components/ActionButton';
 import styled from 'styled-components';
 
 export const StyledPage = styled.div`
@@ -52,4 +53,7 @@ font-size: 12px;
 color: red;
 margin: 0;
 padding: 0;
+`;
+export const StyledBtnAddPass = styled(ActionButton)`
+margin-top: 10px;
 `;

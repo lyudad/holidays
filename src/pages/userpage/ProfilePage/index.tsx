@@ -18,6 +18,7 @@ import {
   StyledInfoSection,
   StyledButton,
   TableWraper,
+  StyledBtnAddPass,
 } from 'pages/userpage/ProfilePage/styles';
 import { FormValues } from 'pages/userpage/ProfilePage/usePassword-types';
 
@@ -99,13 +100,13 @@ const ProfilePage: FunctionComponent = () => {
                 Add
               </ActionButton>
               {!(role === EMPLOYEE_ROLE) && (
-                <ActionButton
+                <StyledBtnAddPass
                   onClick={
                     handleSubmit(onSubmit)
                   }
                 >
                   send password
-                </ActionButton>
+                </StyledBtnAddPass>
               )}
             </StyledButton>
           </StyledInfoSection>
