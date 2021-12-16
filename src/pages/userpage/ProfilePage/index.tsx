@@ -9,6 +9,7 @@ import UserMenu from 'components/userMenu';
 import TableComponent from 'components/Table';
 import sendUserMail from 'services/api/userPasswordApi';
 import schema from 'components/Input/validation';
+import { store } from 'store';
 import { IUser } from 'utils/types';
 import { EMPLOYEE_ROLE, ADD_USER_BUTTON_TEXT } from 'utils/texts-constants';
 import {
@@ -22,6 +23,9 @@ import {
 } from 'pages/userpage/ProfilePage/styles';
 import { FormValues } from 'pages/userpage/ProfilePage/usePassword-types';
 
+const token = {
+  token: store.getState().user.token,
+};
 // времено добавленный пользователь
 const user: IUser = {
   _id: 'qwe',
@@ -52,7 +56,7 @@ const ProfilePage: FunctionComponent = () => {
       last_name: lastName,
       email,
     };
-    sendUserMail(userData);
+    sendUserMail(userData, token.token);
   };
 
   return (
