@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import LANG from 'language/en';
@@ -23,9 +23,6 @@ import {
 } from 'pages/userpage/ProfilePage/styles';
 import { FormValues } from 'pages/userpage/ProfilePage/usePassword-types';
 
-const token = {
-  token: store.getState().user.token,
-};
 // времено добавленный пользователь
 const user: IUser = {
   _id: 'qwe',
@@ -33,9 +30,13 @@ const user: IUser = {
   role: 'superAdmin',
   token: ' ',
 };
+let token = '';
 const ProfilePage: FunctionComponent = () => {
   const { role } = user;
 
+  useEffect(() => {
+    token = store.getState().user.token;
+  }, []);
   const {
     handleSubmit,
     control,
@@ -56,7 +57,7 @@ const ProfilePage: FunctionComponent = () => {
       last_name: lastName,
       email,
     };
-    sendUserMail(userData, token.token);
+    sendUserMail(userData, token);
   };
 
   return (
