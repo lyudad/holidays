@@ -49,7 +49,7 @@ const UsersPage: FC = () => {
       // eslint-disable-next-line no-console
     }).catch((error) => console.log(error));
   }, []);
-   useEffect(() => {
+  useEffect(() => {
     const findUsers = filteredUsers.filter(
       (user: User) => user.last_name.toLocaleLowerCase().includes(filter.toLowerCase()),
     );
