@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import LANG from 'language/en';
@@ -8,8 +7,9 @@ import ActionButton from 'components/ActionButton';
 import DaysCounter from 'components/DaysCounter';
 import UserMenu from 'components/userMenu';
 import TableComponent from 'components/Table';
-import sendUserMail from 'services/reducers/userPassword/userPassword-api-server';
+import sendUserMail from 'services/api/userPasswordApi';
 import schema from 'components/Input/validation';
+import { store } from 'store';
 import { IUser } from 'utils/types';
 import { EMPLOYEE_ROLE, ADD_USER_BUTTON_TEXT } from 'utils/texts-constants';
 import {
@@ -19,8 +19,9 @@ import {
   StyledInfoSection,
   StyledButton,
   TableWraper,
+  StyledBtnAddPass,
 } from 'pages/userpage/ProfilePage/styles';
-import { FormValues } from 'services/reducers/userPassword/usePassword-types';
+import { FormValues } from 'pages/userpage/ProfilePage/usePassword-types';
 
 // времено добавленный пользователь
 const user: IUser = {
@@ -29,12 +30,13 @@ const user: IUser = {
   role: 'superAdmin',
   token: ' ',
 };
+
 const ProfilePage: FunctionComponent = () => {
   const { role } = user;
+  const jwtToken = store.getState().user.token;
 
   const {
     handleSubmit,
-    reset,
     control,
     formState: { errors },
   } = useForm<FormValues>({
@@ -49,13 +51,11 @@ const ProfilePage: FunctionComponent = () => {
   const onSubmit = (data: FormValues) => {
     const { firstName, lastName, email } = data;
     const userData = {
-      id: uuidv4(),
-      firstName,
-      lastName,
+      first_name: firstName,
+      last_name: lastName,
       email,
     };
-    sendUserMail(userData);
-    reset();
+    sendUserMail(userData, jwtToken);
   };
 
   return (
@@ -103,13 +103,13 @@ const ProfilePage: FunctionComponent = () => {
                 Add
               </ActionButton>
               {!(role === EMPLOYEE_ROLE) && (
-                <ActionButton
+                <StyledBtnAddPass
                   onClick={
                     handleSubmit(onSubmit)
                   }
                 >
                   send password
-                </ActionButton>
+                </StyledBtnAddPass>
               )}
             </StyledButton>
           </StyledInfoSection>

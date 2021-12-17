@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Table } from 'antd';
+import { Table, Input } from 'antd';
 import {
   colorPrimaryText,
   gap,
@@ -18,14 +18,25 @@ export const StyledMain = styled.main`
   justify-content: center;
   ${gap};
 `;
+export const WrapperSet = styled.div`
+
+  display: flex;
+  width: 100%;
+ 
+`;
 export const ButtonWrap = styled.div`
   width: clamp(160px, 50%, 320px);
-  flex-basis: 40px;
+  width: 30%;
   align-self: flex-end;
   ${colorPrimaryText}
   & button {
     ${buttonBorder}
   }
+`;
+
+export const StyledFilter = styled(Input)`
+ margin-right: 40px;
+ 
 `;
 export const ContentWrap = styled.div`
   width: 100%;

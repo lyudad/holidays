@@ -1,3 +1,4 @@
+import { UserOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 
 const StyledInput = styled.div`
@@ -14,4 +15,7 @@ padding: 0;
 :hover : {
     color: red;
 }
+`;
+export const StyledIcon = styled(UserOutlined)`
+margin-right: 3px;
 `;

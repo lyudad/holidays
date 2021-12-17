@@ -7,5 +7,9 @@ export type UserValues = {
   firstName: string;
   lastName: string;
   email: string;
-  id: string;
+};
+export type SendValues = {
+  first_name: string;
+  last_name: string;
+  email: string;
 };
