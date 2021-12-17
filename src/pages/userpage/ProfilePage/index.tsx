@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import LANG from 'language/en';
@@ -30,13 +30,13 @@ const user: IUser = {
   role: 'superAdmin',
   token: ' ',
 };
-let token = '';
+
 const ProfilePage: FunctionComponent = () => {
   const { role } = user;
+  const jwtToken = {
+    token: store.getState().user.token,
+  };
 
-  useEffect(() => {
-    token = store.getState().user.token;
-  }, []);
   const {
     handleSubmit,
     control,
@@ -57,7 +57,7 @@ const ProfilePage: FunctionComponent = () => {
       last_name: lastName,
       email,
     };
-    sendUserMail(userData, token);
+    sendUserMail(userData, jwtToken.token);
   };
 
   return (
