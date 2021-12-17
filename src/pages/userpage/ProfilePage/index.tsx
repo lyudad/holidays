@@ -33,9 +33,7 @@ const user: IUser = {
 
 const ProfilePage: FunctionComponent = () => {
   const { role } = user;
-  const jwtToken = {
-    token: store.getState().user.token,
-  };
+  const jwtToken = store.getState().user.token;
 
   const {
     handleSubmit,
@@ -57,7 +55,7 @@ const ProfilePage: FunctionComponent = () => {
       last_name: lastName,
       email,
     };
-    sendUserMail(userData, jwtToken.token);
+    sendUserMail(userData, jwtToken);
   };
 
   return (
