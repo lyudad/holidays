@@ -74,7 +74,9 @@ const UsersPage: FC = () => {
     );
     setUsers(findUsers);
   }, [filter, filteredUsers]);
-
+  const modalOk = () => {
+    setVisible(false);
+  };
   const superAdminTableColumns: ColumnsType<any> = [{
     title: 'Name',
     width: '50%',
@@ -124,6 +126,7 @@ const UsersPage: FC = () => {
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
             required
+            placeholder={LANG.searchUser}
             onChange={onChange}
           />
           <ButtonWrap>
@@ -140,9 +143,9 @@ const UsersPage: FC = () => {
               title={LANG.addNewUser}
               centered
               visible={visible}
-              onOk={() => setVisible(false)}
+              onOk={() => modalOk()}
               onCancel={() => setVisible(false)}
-              width={500}
+              width={410}
             >
               <AddUserForm />
             </Modal>

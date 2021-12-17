@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const StyledInput = styled.div`
-width:25%;
+width:360px;
 height: 30px;`;
 
 export default StyledInput;

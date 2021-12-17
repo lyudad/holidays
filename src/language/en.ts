@@ -16,6 +16,7 @@ const LANG = {
   email: 'email',
   singIn: 'Please sign in',
   addNewUser: 'Enter new user data',
+  searchUser: 'Search User',
 };
 
 export default LANG;
