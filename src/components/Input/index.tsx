@@ -1,7 +1,6 @@
 import React from 'react';
 import { Input } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
-import StyledInput from 'components/Input/styled';
+import StyledInput, { StyledIcon } from 'components/Input/styled';
 import {
   Controller, FieldError, FieldValues, UseControllerProps,
 } from 'react-hook-form';
@@ -25,7 +24,7 @@ function InputComponent<T extends FieldValues>({
         <StyledInput>
           <Input
             style={error && { boxShadow: '0 0 0 2px rgba(245, 62, 39, 0.46)', border: '1px solid red' }}
-            prefix={<UserOutlined />}
+            prefix={<StyledIcon />}
             placeholder={onText}
             value={value}
             onChange={(text) => {

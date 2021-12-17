@@ -9,6 +9,7 @@ const LANG = {
   logout: 'Logout',
   'first-name': 'first name',
   'last-name': 'last name',
+  'user-search': 'search user',
   sickLeave: 'sick leave',
   sickLeaves: 'sick leaves',
   vacationDay: 'vacation day',

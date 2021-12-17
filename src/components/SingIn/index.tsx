@@ -87,7 +87,7 @@ const Auth: FC = () => {
           },
         ]}
       >
-        <StyledInput placeholder="password" />
+        <StyledInput type="password" placeholder="password" />
       </Form.Item>
 
       <Form.Item
