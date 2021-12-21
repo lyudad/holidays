@@ -70,7 +70,7 @@ const AddUserForm:FC<CreateUserForm> = ({
       centered
       visible={isModalOpen}
       onOk={handleSubmit(onSubmit)}
-      onCancel={() => onCancel()}
+      onCancel={onCancel}
       width={410}
     >
       <StyledForm>
