@@ -52,6 +52,10 @@ const AddUserForm:FC<CreateUserForm> = ({
   const role: string = useAppSelector((state) => state.user.userData.role);
   const showRole:boolean = (role === SUPER_ADMIN_ROLE);
 
+  const onCancel = (): void => {
+    reset();
+    toggleModal();
+  };
   const onSubmit: SubmitHandler<FormValues> = (data):void => {
     const newUser:INewUser = {
       ...data,
@@ -66,7 +70,7 @@ const AddUserForm:FC<CreateUserForm> = ({
       centered
       visible={isModalOpen}
       onOk={handleSubmit(onSubmit)}
-      onCancel={() => toggleModal()}
+      onCancel={() => onCancel()}
       width={410}
     >
       <StyledForm>
