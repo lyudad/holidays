@@ -1,15 +1,12 @@
 import React, { FC } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import LANG from 'language/en';
-import { useAppSelector, useAppDispatch } from 'utils/hooks';
+import { useAppSelector } from 'utils/hooks';
 import { SUPER_ADMIN_ROLE } from 'utils/texts-constants';
-import API from 'services/api/userApi';
-import { ICreateUser } from 'services/reducers/user/api.types';
 import InputComponent from 'components/Input';
 import schema from 'components/Input/validation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Modal } from 'antd';
-import { toggle } from 'services/reducers/modal/modalSlice';
 import { StyledForm } from 'components/AddUserForm/styled';
 
 type FormValues = {
@@ -24,10 +21,18 @@ interface INewUser {
   email: string;
   role?: string | undefined;
 }
+interface CreateUserForm {
+  isModalOpen: boolean;
+  onFinish: (values: INewUser) => void;
+  toggleModal: () => void;
 
-const ModalAddUser: FC = () => {
-  const dispatch = useAppDispatch();
-  const isModalOpen: boolean = useAppSelector((state) => state.data.modal.isModalOpen);
+}
+
+const AddUserForm:FC<CreateUserForm> = ({
+  isModalOpen,
+  onFinish,
+  toggleModal,
+}) => {
   const {
     handleSubmit,
     reset,
@@ -44,19 +49,14 @@ const ModalAddUser: FC = () => {
     mode: 'onChange',
   });
 
-  const role: string = useAppSelector((state) => state.data.user.userData.role);
+  const role: string = useAppSelector((state) => state.user.userData.role);
   const showRole:boolean = (role === SUPER_ADMIN_ROLE);
-  const onFinish = async (values:ICreateUser):Promise<any> => {
-    const result = await API.addNewUser(values);
-    reset();
-    return result;
-  };
+
   const onSubmit: SubmitHandler<FormValues> = (data):void => {
     const newUser:INewUser = {
       ...data,
     };
     onFinish(newUser);
-    dispatch(toggle());
     reset();
   };
 
@@ -66,7 +66,7 @@ const ModalAddUser: FC = () => {
       centered
       visible={isModalOpen}
       onOk={handleSubmit(onSubmit)}
-      onCancel={() => dispatch(toggle())}
+      onCancel={() => toggleModal()}
       width={410}
     >
       <StyledForm>
@@ -104,4 +104,4 @@ const ModalAddUser: FC = () => {
     </Modal>
   );
 };
-export default ModalAddUser;
+export default AddUserForm;
