@@ -8,7 +8,7 @@ import getUserList from 'services/api/userlistApi';
 import ActionButton from 'components/ActionButton';
 import UserMenu from 'components/userMenu';
 import LANG from 'language/en';
-import ModalAddUser from 'components/AddUserForm/AddUserForm';
+import ModalAddUser from 'components/AddUserForm';
 import { store } from 'store';
 import { ADD_USER_BUTTON_TEXT, SUPER_ADMIN_ROLE } from 'utils/texts-constants';
 import { useAppSelector, useAppDispatch } from 'utils/hooks';

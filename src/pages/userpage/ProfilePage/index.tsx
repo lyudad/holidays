@@ -10,7 +10,6 @@ import TableComponent from 'components/Table';
 import sendUserMail from 'services/api/userPasswordApi';
 import schema from 'components/Input/validation';
 import { store } from 'store';
-// import { useAppSelector } from 'utils/hooks';
 import { EMPLOYEE_ROLE } from 'utils/texts-constants';
 import {
   StyledPage,
