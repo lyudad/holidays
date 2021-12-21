@@ -1,6 +1,6 @@
 import React from 'react';
-import { Input } from 'antd';
-import StyledInput, { StyledIcon } from 'components/Input/styled';
+// import { Input } from 'antd';
+import { StyledIcon, StyledInput, StyledWrapInput } from 'components/Input/styled';
 import {
   Controller, FieldError, FieldValues, UseControllerProps,
 } from 'react-hook-form';
@@ -21,18 +21,19 @@ function InputComponent<T extends FieldValues>({
         required: 'This is required',
       }}
       render={({ field: { onChange, value } }) => (
-        <StyledInput>
-          <Input
+        <StyledWrapInput>
+          <StyledInput
             style={error && { boxShadow: '0 0 0 2px rgba(245, 62, 39, 0.46)', border: '1px solid red' }}
             prefix={<StyledIcon />}
             placeholder={onText}
             value={value}
+            // defaultValue={onText}
             onChange={(text) => {
               onChange(text);
             }}
           />
           {error && <span style={{ color: 'red' }}>{error?.message}</span>}
-        </StyledInput>
+        </StyledWrapInput>
       )}
     />
   );

@@ -3,13 +3,14 @@ import React, {
   useEffect,
   useState,
 } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ColumnsType } from 'antd/es/table';
 import getUserList from 'services/api/userlistApi';
 import ActionButton from 'components/ActionButton';
 import UserMenu from 'components/userMenu';
 import { store } from 'store';
 import { ADD_USER_BUTTON_TEXT, SUPER_ADMIN_ROLE } from 'utils/texts-constants';
-import { deleteUser, editUser, toggleUser } from './users-btn-logic';
+import { deleteUser, toggleUser } from './users-btn-logic';
 import {
   StyledPage,
   StyledMain,
@@ -25,6 +26,7 @@ import {
 interface User {
   first_name: string;
   last_name: string;
+  email: string;
   is_blocked: boolean;
   user_id: number;
 }
@@ -34,7 +36,7 @@ const UsersPage: FC = () => {
   const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
   const [filter, setFilter] = useState<string>('');
   const userRole = store.getState().user.userData.role;
-
+  const navigate = useNavigate();
   useEffect(() => {
     const token = {
       token: store.getState().user.token,
@@ -72,8 +74,8 @@ const UsersPage: FC = () => {
   {
     title: 'Actions',
     width: '25%',
-    render: ({ is_blocked }) => (
-      <StyledActionButton color={is_blocked} type="text" size="middle" onClick={() => editUser(is_blocked)}>Edit</StyledActionButton>
+    render: (record) => (
+      <StyledActionButton color={record.is_blocked} type="text" size="middle" onClick={() => navigate('/userpage', { state: record })}>Edit</StyledActionButton>
     ),
   },
   {
