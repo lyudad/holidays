@@ -10,7 +10,10 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import userReducer from 'services/reducers/user/userSlice';
+// import userReducer from 'services/reducers/user/userSlice';
+
+// import modalReducer from 'services/reducers/modal/modalSlice';
+import combineReducers from 'services/reducers';
 
 const userPersistConfig = {
   key: 'user',
@@ -20,7 +23,10 @@ const userPersistConfig = {
 
 export const store = configureStore({
   reducer: {
-    user: persistReducer(userPersistConfig, userReducer),
+    data: persistReducer(userPersistConfig, combineReducers),
+    // user: persistReducer(userPersistConfig, userReducer),
+    // modal: modalReducer,
+
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: {

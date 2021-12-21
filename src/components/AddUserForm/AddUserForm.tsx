@@ -1,14 +1,16 @@
 import React, { FC } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import LANG from 'language/en';
-import { useAppSelector } from 'utils/hooks';
+import { useAppSelector, useAppDispatch } from 'utils/hooks';
 import { SUPER_ADMIN_ROLE } from 'utils/texts-constants';
 import API from 'services/api/userApi';
 import { ICreateUser } from 'services/reducers/user/api.types';
-import { StyledForm } from 'components/AddUserForm/styled';
 import InputComponent from 'components/Input';
 import schema from 'components/Input/validation';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Modal } from 'antd';
+import { toggle } from 'services/reducers/modal/modalSlice';
+import { StyledForm } from 'components/AddUserForm/styled';
 
 type FormValues = {
   first_name: string;
@@ -16,8 +18,16 @@ type FormValues = {
   email: string;
   role?: string;
 };
+interface INewUser {
+  first_name: string;
+  last_name: string;
+  email: string;
+  role?: string | undefined;
+}
 
-const AddUserForm:FC = () => {
+const ModalAddUser: FC = () => {
+  const dispatch = useAppDispatch();
+  const isModalOpen: boolean = useAppSelector((state) => state.data.modal.isModalOpen);
   const {
     handleSubmit,
     reset,
@@ -28,61 +38,70 @@ const AddUserForm:FC = () => {
       first_name: '',
       last_name: '',
       email: '',
-      role: '',
+      role: undefined,
     },
     resolver: yupResolver(schema),
     mode: 'onChange',
   });
-  const role: string = useAppSelector((state) => state.user.userData.role);
-  const showRole = (role === SUPER_ADMIN_ROLE);
-  const onFinish = async (values:ICreateUser) => {
+
+  const role: string = useAppSelector((state) => state.data.user.userData.role);
+  const showRole:boolean = (role === SUPER_ADMIN_ROLE);
+  const onFinish = async (values:ICreateUser):Promise<any> => {
     const result = await API.addNewUser(values);
     reset();
     return result;
   };
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    const newUser = {
+  const onSubmit: SubmitHandler<FormValues> = (data):void => {
+    const newUser:INewUser = {
       ...data,
     };
     onFinish(newUser);
-    console.log(newUser);
+    dispatch(toggle());
     reset();
   };
 
   return (
-    <StyledForm onSubmit={handleSubmit(onSubmit)}>
-      <InputComponent
-        name="first_name"
-        control={control}
-        rules={{ required: true }}
-        error={errors.first_name}
-        onText={LANG['first-name']}
-      />
-      <InputComponent
-        name="last_name"
-        control={control}
-        rules={{ required: true }}
-        error={errors.last_name}
-        onText={LANG['last-name']}
-      />
-      <InputComponent
-        name="email"
-        control={control}
-        rules={{ required: true }}
-        error={errors.email}
-        onText={LANG.email}
-      />
-      { showRole && (
-      <InputComponent
-        name="role"
-        control={control}
-        rules={{ required: true }}
-        error={errors.role}
-        onText={LANG.role}
-      />
-      )}
-      <input type="submit" width={40} />
-    </StyledForm>
+    <Modal
+      title={LANG.addNewUser}
+      centered
+      visible={isModalOpen}
+      onOk={handleSubmit(onSubmit)}
+      onCancel={() => dispatch(toggle())}
+      width={410}
+    >
+      <StyledForm>
+        <InputComponent
+          name="first_name"
+          control={control}
+          rules={{ required: true }}
+          error={errors.first_name}
+          onText={LANG['first-name']}
+        />
+        <InputComponent
+          name="last_name"
+          control={control}
+          rules={{ required: true }}
+          error={errors.last_name}
+          onText={LANG['last-name']}
+        />
+        <InputComponent
+          name="email"
+          control={control}
+          rules={{ required: true }}
+          error={errors.email}
+          onText={LANG.email}
+        />
+        { showRole && (
+        <InputComponent
+          name="role"
+          control={control}
+          rules={{ required: true }}
+          error={errors.role}
+          onText={LANG.role}
+        />
+        )}
+      </StyledForm>
+    </Modal>
   );
 };
-export default AddUserForm;
+export default ModalAddUser;

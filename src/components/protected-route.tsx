@@ -11,7 +11,7 @@ export interface Props {
 const RequireAuth: FC<Props> = ({ children }):any => {
   const navigate = useNavigate();
 
-  const { loggedIn } = useAppSelector((state) => state.user.loggedIn);
+  const { loggedIn } = useAppSelector((state) => state.data.user.loggedIn);
 
   const auth = loggedIn;
   if (auth === false) {

@@ -7,11 +7,12 @@ import { ColumnsType } from 'antd/es/table';
 import getUserList from 'services/api/userlistApi';
 import ActionButton from 'components/ActionButton';
 import UserMenu from 'components/userMenu';
-import { Modal } from 'antd';
 import LANG from 'language/en';
-import AddUserForm from 'components/AddUserForm';
+import ModalAddUser from 'components/AddUserForm/AddUserForm';
 import { store } from 'store';
 import { ADD_USER_BUTTON_TEXT, SUPER_ADMIN_ROLE } from 'utils/texts-constants';
+import { useAppSelector, useAppDispatch } from 'utils/hooks';
+import { toggle } from 'services/reducers/modal/modalSlice';
 import { deleteUser, editUser, toggleUser } from './users-btn-logic';
 import {
   StyledPage,
@@ -34,14 +35,15 @@ interface User {
 
 const UsersPage: FC = () => {
   const [users, setUsers] = useState<User[]>([]);
-  const [visible, setVisible] = useState(false);
   const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
   const [filter, setFilter] = useState<string>('');
-  const userRole = store.getState().user.userData.role;
+  const userRole = store.getState().data.user.userData.role;
+  const dispatch = useAppDispatch();
+  const isModalOpen: boolean = useAppSelector((state) => state.data.modal.isModalOpen);
 
   useEffect(() => {
     const token = {
-      token: store.getState().user.token,
+      token: store.getState().data.user.token,
     };
 
     getUserList(token).then((data) => {
@@ -56,7 +58,7 @@ const UsersPage: FC = () => {
 
   useEffect(() => {
     const token = {
-      token: store.getState().user.token,
+      token: store.getState().data.user.token,
     };
 
     getUserList(token).then((data) => {
@@ -66,7 +68,7 @@ const UsersPage: FC = () => {
       setUsers(data);
       // eslint-disable-next-line no-console
     }).catch((error) => console.log(error));
-  }, [visible]);
+  }, [isModalOpen]);
 
   useEffect(() => {
     const findUsers = filteredUsers.filter(
@@ -74,9 +76,7 @@ const UsersPage: FC = () => {
     );
     setUsers(findUsers);
   }, [filter, filteredUsers]);
-  const modalOk = () => {
-    setVisible(false);
-  };
+
   const superAdminTableColumns: ColumnsType<any> = [{
     title: 'Name',
     width: '50%',
@@ -135,20 +135,11 @@ const UsersPage: FC = () => {
               type="default"
               shape="round"
               size="large"
-              onClick={() => setVisible(true)}
+              onClick={() => dispatch(toggle())}
             >
               {ADD_USER_BUTTON_TEXT}
             </ActionButton>
-            <Modal
-              title={LANG.addNewUser}
-              centered
-              visible={visible}
-              onOk={() => modalOk()}
-              onCancel={() => setVisible(false)}
-              width={410}
-            >
-              <AddUserForm />
-            </Modal>
+            { isModalOpen && <ModalAddUser />}
           </ButtonWrap>
         </WrapperSet>
         <ContentWrap>

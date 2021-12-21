@@ -11,7 +11,7 @@ import sendUserMail from 'services/api/userPasswordApi';
 import schema from 'components/Input/validation';
 import { store } from 'store';
 // import { useAppSelector } from 'utils/hooks';
-import { EMPLOYEE_ROLE, ADD_USER_BUTTON_TEXT } from 'utils/texts-constants';
+import { EMPLOYEE_ROLE } from 'utils/texts-constants';
 import {
   StyledPage,
   StyledContent,
@@ -22,6 +22,7 @@ import {
   StyledBtnAddPass,
 } from 'pages/userpage/ProfilePage/styles';
 import { FormValues } from 'pages/userpage/ProfilePage/usePassword-types';
+import { CheckOutlined } from '@ant-design/icons';
 
 const ProfilePage: FunctionComponent = () => {
   const { role } = store.getState().user.userData;
@@ -80,7 +81,7 @@ const ProfilePage: FunctionComponent = () => {
                     error={errors.email}
                     onText={LANG.email}
                   />
-                  <ActionButton>{ADD_USER_BUTTON_TEXT}</ActionButton>
+                  <ActionButton><CheckOutlined /></ActionButton>
                 </>
               )}
             </StyledInputWrapper>

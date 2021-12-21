@@ -9,7 +9,7 @@ import { signOut } from 'services/reducers/user/userSlice';
 
 function UserMenu() {
   const dispatch = useAppDispatch();
-  const role:string = useAppSelector((state) => state.user.userData.role);
+  const role:string = useAppSelector((state) => state.data.user.userData.role);
 
   const onClick = () => {
     dispatch(signOut());
