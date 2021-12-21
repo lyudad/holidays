@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Input } from 'antd';
 import { StyledIcon, StyledInput, StyledWrapInput } from 'components/Input/styled';
 import {
   Controller, FieldError, FieldValues, UseControllerProps,
@@ -27,7 +26,6 @@ function InputComponent<T extends FieldValues>({
             prefix={<StyledIcon />}
             placeholder={onText}
             value={value}
-            // defaultValue={onText}
             onChange={(text) => {
               onChange(text);
             }}
