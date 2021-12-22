@@ -33,7 +33,6 @@ function UserMenu() {
             </Menu.Item>
             <Menu.Item key={LANG.users}>
               <Link to="/users">{LANG.users}</Link>
-              {LANG.users}
             </Menu.Item>
           </>
         ) : null }

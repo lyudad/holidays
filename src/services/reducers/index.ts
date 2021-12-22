@@ -1,3 +1,3 @@
 import userReducer from 'services/reducers/user/userSlice';
 
-export default { userReducer };
+export default userReducer;

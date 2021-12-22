@@ -10,29 +10,21 @@ import TableComponent from 'components/Table';
 import sendUserMail from 'services/api/userPasswordApi';
 import schema from 'components/Input/validation';
 import { store } from 'store';
-import { IUser } from 'utils/types';
-import { EMPLOYEE_ROLE, ADD_USER_BUTTON_TEXT } from 'utils/texts-constants';
+import { EMPLOYEE_ROLE } from 'utils/texts-constants';
 import {
   StyledPage,
   StyledContent,
-  StyledInputWraper,
+  StyledInputWrapper,
   StyledInfoSection,
   StyledButton,
-  TableWraper,
+  TableWrapper,
   StyledBtnAddPass,
 } from 'pages/userpage/ProfilePage/styles';
 import { FormValues } from 'pages/userpage/ProfilePage/usePassword-types';
-
-// времено добавленный пользователь
-const user: IUser = {
-  _id: 'qwe',
-  name: 'string',
-  role: 'superAdmin',
-  token: ' ',
-};
+import { CheckOutlined } from '@ant-design/icons';
 
 const ProfilePage: FunctionComponent = () => {
-  const { role } = user;
+  const { role } = store.getState().user.userData;
   const jwtToken = store.getState().user.token;
 
   const {
@@ -64,7 +56,7 @@ const ProfilePage: FunctionComponent = () => {
         <UserMenu />
         <StyledContent>
           <StyledInfoSection>
-            <StyledInputWraper>
+            <StyledInputWrapper>
               <InputComponent
                 name="firstName"
                 control={control}
@@ -79,7 +71,7 @@ const ProfilePage: FunctionComponent = () => {
                 onText={LANG['last-name']}
                 error={errors.lastName}
               />
-              {!(role === EMPLOYEE_ROLE) && (
+              {(role !== EMPLOYEE_ROLE) && (
                 <>
                   <InputComponent
                     name="email"
@@ -88,21 +80,21 @@ const ProfilePage: FunctionComponent = () => {
                     error={errors.email}
                     onText={LANG.email}
                   />
-                  <ActionButton>{ADD_USER_BUTTON_TEXT}</ActionButton>
+                  <ActionButton><CheckOutlined /></ActionButton>
                 </>
               )}
-            </StyledInputWraper>
+            </StyledInputWrapper>
             <DaysCounter sickDays={5} vacationDays={15} />
             <StyledButton>
               <ActionButton
                 onClick={(): void => {
                   // eslint-disable-next-line no-console
-                  console.log('cliked');
+                  console.log('clicked');
                 }}
               >
                 Add
               </ActionButton>
-              {!(role === EMPLOYEE_ROLE) && (
+              {(role !== EMPLOYEE_ROLE) && (
                 <StyledBtnAddPass
                   onClick={
                     handleSubmit(onSubmit)
@@ -113,9 +105,9 @@ const ProfilePage: FunctionComponent = () => {
               )}
             </StyledButton>
           </StyledInfoSection>
-          <TableWraper>
+          <TableWrapper>
             <TableComponent />
-          </TableWraper>
+          </TableWrapper>
         </StyledContent>
       </StyledPage>
     </>
