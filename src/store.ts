@@ -15,7 +15,6 @@ import userReducer from 'services/reducers/user/userSlice';
 const userPersistConfig = {
   key: 'user',
   storage,
-
 };
 
 export const store = configureStore({
@@ -34,5 +33,3 @@ export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
 export const persistor = persistStore(store);
-
-// setupListeners(store.dispatch);

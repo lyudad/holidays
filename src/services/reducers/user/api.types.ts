@@ -9,3 +9,9 @@ export type ReturnUser = {
   role: string;
   is_blocked: string;
 };
+export type ICreateUser = {
+  first_name: string;
+  last_name: string;
+  email: string;
+  role?: string;
+};
