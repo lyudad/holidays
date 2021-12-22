@@ -3,7 +3,7 @@ import { SendUpdateValues } from 'pages/userpage/ProfilePage/usePassword-types';
 
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
-async function updateById(id: string, data: SendUpdateValues, token: string) {
+async function updateById(id: number, data: SendUpdateValues, token: string) {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 
   try {
