@@ -1,6 +1,7 @@
 import React, {
   FunctionComponent,
   useEffect,
+  useMemo,
   useState,
 } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -36,27 +37,14 @@ const ProfilePage: FunctionComponent = () => {
   const [userInfo, setUserInfo] = useState<UserData | null>(null);
   const currentId = location ? location.user_id : userData.id;
 
-  const fieldValues = (option: string): string => {
-    if (userInfo) {
-      switch (option) {
-        case 'first_name':
-          return userInfo.first_name;
-        case 'last_name':
-          return userInfo.last_name;
-        case 'email':
-          return userInfo.email;
-        default:
-          return '';
-      }
-    }
-    return '';
-  };
-
-  const defaultValues = {
-    firstName: `${fieldValues('first_name')}`,
-    lastName: `${fieldValues('last_name')}`,
-    email: `${fieldValues('email')}`,
-  };
+  const defaultValues = useMemo(() => {
+    const values = {
+      firstName: `${userInfo ? userInfo.first_name : ''}`,
+      lastName: `${userInfo ? userInfo.last_name : ''}`,
+      email: `${userInfo ? userInfo.email : ''}`,
+    };
+    return values;
+  }, [userInfo]);
 
   const {
     handleSubmit,
@@ -69,26 +57,6 @@ const ProfilePage: FunctionComponent = () => {
     mode: 'onChange',
   });
 
-  const onSubmit = (data: FormValues) => {
-    const { firstName, lastName, email } = data;
-    const userCreated = {
-      first_name: firstName,
-      last_name: lastName,
-      email,
-    };
-    sendUserMail(userCreated, token);
-  };
-  const onSubmitSaveUser = (data: FormValues) => {
-    const { firstName, lastName, email } = data;
-    const userCreated = {
-      id: currentId,
-      first_name: firstName,
-      last_name: lastName,
-      email,
-    };
-    setUserInfo(userCreated);
-    updateById(userCreated.id, userCreated, token);
-  };
   useEffect(() => {
     getById(currentId, token).then((data) => {
       const userCreated = {
@@ -101,11 +69,34 @@ const ProfilePage: FunctionComponent = () => {
       // eslint-disable-next-line no-console
     }).catch((error) => console.log(error));
   }, [currentId, token]);
+
   useEffect(() => {
     if (userInfo) {
       reset(defaultValues);
     }
-  }, [userInfo]);
+  }, [userInfo, defaultValues, reset]);
+
+  const onSubmit = (data: FormValues) => {
+    const { firstName, lastName, email } = data;
+    const userCreated = {
+      first_name: firstName,
+      last_name: lastName,
+      email,
+    };
+    sendUserMail(userCreated, token);
+  };
+
+  const onSubmitSaveUser = (data: FormValues) => {
+    const { firstName, lastName, email } = data;
+    const userCreated = {
+      id: currentId,
+      first_name: firstName,
+      last_name: lastName,
+      email,
+    };
+    setUserInfo(userCreated);
+    updateById(userCreated.id, userCreated, token);
+  };
 
   return (
     <>
@@ -119,13 +110,13 @@ const ProfilePage: FunctionComponent = () => {
                 control={control}
                 rules={{ required: true }}
                 error={errors.firstName}
-                onText={fieldValues('first_name')}
+                onText={userInfo ? userInfo.first_name : ''}
               />
               <InputComponent
                 name="lastName"
                 control={control}
                 rules={{ required: true }}
-                onText={fieldValues('last_name')}
+                onText={userInfo ? userInfo.last_name : ''}
                 error={errors.lastName}
               />
               {!(userData.role === EMPLOYEE_ROLE) && (
@@ -135,7 +126,7 @@ const ProfilePage: FunctionComponent = () => {
                     control={control}
                     rules={{ required: true }}
                     error={errors.email}
-                    onText={fieldValues('email')}
+                    onText={userInfo ? userInfo.email : ''}
                   />
                   <ActionButton
                     onClick={handleSubmit(onSubmitSaveUser)}
