@@ -15,8 +15,8 @@ export const StyledInput = styled(Input)`
 margin-left:50px;
 margin-right:50px;
 margin-top:25px;
-
 `;
+
 export const StyledMessage = styled.div`
 margin-left:50px;
 margin-right: auto;

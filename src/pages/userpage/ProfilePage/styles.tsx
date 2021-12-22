@@ -16,10 +16,10 @@ export const StyledInfoSection = styled.section`
 width:100%;
 display: flex;
 flex-wrap: wrap;
-pading: 20, 10;
+padding: 20, 10;
 `;
 
-export const StyledInputWraper = styled.div`
+export const StyledInputWrapper = styled.div`
 width:100%;
 height: 50px;
 display: flex;
@@ -36,7 +36,7 @@ margin-left: auto;
 margin-right: 10%;
 `;
 
-export const TableWraper = styled.div`
+export const TableWrapper = styled.div`
 display: block;
 width:100%;
 margin: 20px;
