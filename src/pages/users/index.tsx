@@ -37,6 +37,7 @@ const UsersPage: FC = () => {
   const [filter, setFilter] = useState<string>('');
   const userRole = store.getState().user.userData.role;
   const navigate = useNavigate();
+
   useEffect(() => {
     const token = {
       token: store.getState().user.token,
