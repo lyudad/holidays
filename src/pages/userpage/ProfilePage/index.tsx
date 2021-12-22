@@ -121,7 +121,6 @@ const ProfilePage: FunctionComponent = () => {
               />
               {!(userData.role === EMPLOYEE_ROLE) && (
 
-
                 <>
                   <InputComponent
                     name="email"

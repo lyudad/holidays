@@ -5,16 +5,16 @@ import React, {
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ColumnsType } from 'antd/es/table';
+import API from 'services/api/userApi';
 import getUserList from 'services/api/userlistApi';
 import ActionButton from 'components/ActionButton';
 import UserMenu from 'components/userMenu';
 import LANG from 'language/en';
 import ModalAddUser from 'components/AddUserForm';
 import { store } from 'store';
+import { ICreateUser } from 'services/reducers/user/api.types';
 import { ADD_USER_BUTTON_TEXT, SUPER_ADMIN_ROLE } from 'utils/texts-constants';
 import { deleteUser, toggleUser } from './users-btn-logic';
-import API from 'services/api/userApi';
-import { ICreateUser } from 'services/reducers/user/api.types';
 import {
   StyledPage,
   StyledMain,
