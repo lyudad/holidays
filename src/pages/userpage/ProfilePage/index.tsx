@@ -1,7 +1,6 @@
 import React, {
   FunctionComponent,
   useEffect,
-  useMemo,
   useState,
 } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -37,14 +36,11 @@ const ProfilePage: FunctionComponent = () => {
   const [userInfo, setUserInfo] = useState<UserData | null>(null);
   const currentId = location ? location.user_id : userData.id;
 
-  const defaultValues = useMemo(() => {
-    const values = {
-      firstName: `${userInfo ? userInfo.first_name : ''}`,
-      lastName: `${userInfo ? userInfo.last_name : ''}`,
-      email: `${userInfo ? userInfo.email : ''}`,
-    };
-    return values;
-  }, [userInfo]);
+  const defaultValues = {
+    firstName: `${userInfo ? userInfo.first_name : ''}`,
+    lastName: `${userInfo ? userInfo.last_name : ''}`,
+    email: `${userInfo ? userInfo.email : ''}`,
+  };
 
   const {
     handleSubmit,
@@ -74,7 +70,7 @@ const ProfilePage: FunctionComponent = () => {
     if (userInfo) {
       reset(defaultValues);
     }
-  }, [userInfo, defaultValues, reset]);
+  }, [userInfo]);
 
   const onSubmit = (data: FormValues) => {
     const { firstName, lastName, email } = data;
