@@ -49,7 +49,7 @@ const AddUserForm:FC<CreateUserForm> = ({
     mode: 'onChange',
   });
 
-  const role: string = useAppSelector((state) => state.user.userData.role);
+  const role: string = useAppSelector((state: any) => state.user.userData.role);
   const showRole:boolean = (role === SUPER_ADMIN_ROLE);
 
   const onCancel = (): void => {

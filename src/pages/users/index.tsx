@@ -3,17 +3,18 @@ import React, {
   useEffect,
   useState,
 } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ColumnsType } from 'antd/es/table';
+import API from 'services/api/userApi';
 import getUserList from 'services/api/userlistApi';
 import ActionButton from 'components/ActionButton';
 import UserMenu from 'components/userMenu';
 import LANG from 'language/en';
 import ModalAddUser from 'components/AddUserForm';
 import { store } from 'store';
-import { ADD_USER_BUTTON_TEXT, SUPER_ADMIN_ROLE } from 'utils/texts-constants';
-import API from 'services/api/userApi';
 import { ICreateUser } from 'services/reducers/user/api.types';
-import { deleteUser, editUser, toggleUser } from './users-btn-logic';
+import { ADD_USER_BUTTON_TEXT, SUPER_ADMIN_ROLE } from 'utils/texts-constants';
+import { deleteUser, toggleUser } from './users-btn-logic';
 import {
   StyledPage,
   StyledMain,
@@ -29,6 +30,7 @@ import {
 interface User {
   first_name: string;
   last_name: string;
+  email: string;
   is_blocked: boolean;
   user_id: number;
 }
@@ -39,6 +41,7 @@ const UsersPage: FC = () => {
   const [filter, setFilter] = useState<string>('');
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const userRole = store.getState().user.userData.role;
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = {
@@ -102,8 +105,8 @@ const UsersPage: FC = () => {
   {
     title: 'Actions',
     width: '25%',
-    render: ({ is_blocked }) => (
-      <StyledActionButton color={is_blocked} type="text" size="middle" onClick={() => editUser(is_blocked)}>Edit</StyledActionButton>
+    render: (record) => (
+      <StyledActionButton color={record.is_blocked} type="text" size="middle" onClick={() => navigate('/userpage', { state: record })}>Edit</StyledActionButton>
     ),
   },
   {
