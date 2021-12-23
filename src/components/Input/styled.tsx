@@ -3,7 +3,7 @@ import { Input } from 'antd';
 import styled from 'styled-components';
 
 export const StyledWrapInput = styled.div`
-width:25%;
+width:360px;
 height: 30px;`;
 
 export const StyledNotification = styled.p`

@@ -101,6 +101,7 @@ const ProfilePage: FunctionComponent = () => {
         <StyledContent>
           <StyledInfoSection>
             <StyledInputWrapper>
+
               <InputComponent
                 name="firstName"
                 control={control}
@@ -108,6 +109,7 @@ const ProfilePage: FunctionComponent = () => {
                 error={errors.firstName}
                 onText={userInfo ? userInfo.first_name : ''}
               />
+
               <InputComponent
                 name="lastName"
                 control={control}
@@ -115,9 +117,11 @@ const ProfilePage: FunctionComponent = () => {
                 onText={userInfo ? userInfo.last_name : ''}
                 error={errors.lastName}
               />
+
               {!(userData.role === EMPLOYEE_ROLE) && (
 
                 <>
+
                   <InputComponent
                     name="email"
                     control={control}
