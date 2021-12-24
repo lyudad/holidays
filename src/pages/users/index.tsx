@@ -3,13 +3,18 @@ import React, {
   useEffect,
   useState,
 } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ColumnsType } from 'antd/es/table';
+import API from 'services/api/userApi';
 import getUserList from 'services/api/userlistApi';
 import ActionButton from 'components/ActionButton';
 import UserMenu from 'components/userMenu';
+import LANG from 'language/en';
+import ModalAddUser from 'components/AddUserForm';
 import { store } from 'store';
+import { ICreateUser } from 'services/reducers/user/api.types';
 import { ADD_USER_BUTTON_TEXT, SUPER_ADMIN_ROLE } from 'utils/texts-constants';
-import { deleteUser, editUser, toggleUser } from './users-btn-logic';
+import { deleteUser, toggleUser } from './users-btn-logic';
 import {
   StyledPage,
   StyledMain,
@@ -25,6 +30,7 @@ import {
 interface User {
   first_name: string;
   last_name: string;
+  email: string;
   is_blocked: boolean;
   user_id: number;
 }
@@ -33,7 +39,9 @@ const UsersPage: FC = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
   const [filter, setFilter] = useState<string>('');
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const userRole = store.getState().user.userData.role;
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = {
@@ -49,12 +57,37 @@ const UsersPage: FC = () => {
       // eslint-disable-next-line no-console
     }).catch((error) => console.log(error));
   }, []);
-   useEffect(() => {
+
+  useEffect(() => {
+    const token = {
+      token: store.getState().user.token,
+    };
+
+    getUserList(token).then((data) => {
+      if (data.length === 0) {
+        return;
+      }
+      setUsers(data);
+      // eslint-disable-next-line no-console
+    }).catch((error) => console.log(error));
+  }, [isModalOpen]);
+
+  useEffect(() => {
     const findUsers = filteredUsers.filter(
       (user: User) => user.last_name.toLocaleLowerCase().includes(filter.toLowerCase()),
     );
     setUsers(findUsers);
   }, [filter, filteredUsers]);
+
+  const toggleModal = ():void => {
+    setIsModalOpen(!isModalOpen);
+  };
+  const onFinish = async (values:ICreateUser):Promise<any> => {
+    const result = await API.addNewUser(values);
+    toggleModal();
+    return result;
+  };
+
   const superAdminTableColumns: ColumnsType<any> = [{
     title: 'Name',
     width: '50%',
@@ -72,8 +105,8 @@ const UsersPage: FC = () => {
   {
     title: 'Actions',
     width: '25%',
-    render: ({ is_blocked }) => (
-      <StyledActionButton color={is_blocked} type="text" size="middle" onClick={() => editUser(is_blocked)}>Edit</StyledActionButton>
+    render: (record) => (
+      <StyledActionButton color={record.is_blocked} type="text" size="middle" onClick={() => navigate('/userpage', { state: record })}>Edit</StyledActionButton>
     ),
   },
   {
@@ -95,7 +128,6 @@ const UsersPage: FC = () => {
   return (
     <StyledPage>
       <UserMenu />
-
       <StyledMain>
         <WrapperSet>
           <StyledFilter
@@ -105,6 +137,7 @@ const UsersPage: FC = () => {
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
             required
+            placeholder={LANG.searchUser}
             onChange={onChange}
           />
           <ButtonWrap>
@@ -113,11 +146,15 @@ const UsersPage: FC = () => {
               type="default"
               shape="round"
               size="large"
-              // eslint-disable-next-line no-console
-              onClick={() => console.log('add another user cb')}
+              onClick={() => toggleModal()}
             >
               {ADD_USER_BUTTON_TEXT}
             </ActionButton>
+            <ModalAddUser
+              isModalOpen={isModalOpen}
+              onFinish={onFinish}
+              toggleModal={toggleModal}
+            />
           </ButtonWrap>
         </WrapperSet>
         <ContentWrap>

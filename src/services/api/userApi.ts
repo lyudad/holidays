@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ILoginData } from 'services/reducers/user/api.types';
+import { ILoginData, ICreateUser } from 'services/reducers/user/api.types';
 
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
@@ -12,7 +12,7 @@ const jwtToken = {
   },
 };
 
-async function loginUser(data: ILoginData) {
+async function loginUser(data: ILoginData):Promise<any> {
   try {
     const email = data.login;
     const { password } = data;
@@ -25,9 +25,9 @@ async function loginUser(data: ILoginData) {
   }
 }
 
-async function logoutUser() {
+async function logoutUser() :Promise<any> {
   try {
-    await axios.post('/users/logout');
+    await axios.post('/user/logout');
     jwtToken.unset();
     return 'ok';
   } catch (error) {
@@ -35,5 +35,14 @@ async function logoutUser() {
   }
 }
 
-const API = { loginUser, logoutUser };
+async function addNewUser(data :ICreateUser):Promise<any> {
+  try {
+    const response = await axios.post('user/create', { ...data });
+    return response;
+  } catch (error) {
+    return error;
+  }
+}
+
+const API = { loginUser, logoutUser, addNewUser };
 export default API;

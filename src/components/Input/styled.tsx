@@ -1,11 +1,10 @@
 import { UserOutlined } from '@ant-design/icons';
+import { Input } from 'antd';
 import styled from 'styled-components';
 
-const StyledInput = styled.div`
-width:25%;
+export const StyledWrapInput = styled.div`
+width:360px;
 height: 30px;`;
-
-export default StyledInput;
 
 export const StyledNotification = styled.p`
 font-size: 12px;
@@ -18,4 +17,9 @@ padding: 0;
 `;
 export const StyledIcon = styled(UserOutlined)`
 margin-right: 3px;
+`;
+export const StyledInput = styled(Input)`
+&::-webkit-input-placeholder {
+    color: "red";
+  }
 `;
