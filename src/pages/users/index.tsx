@@ -5,6 +5,7 @@ import React, {
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ColumnsType } from 'antd/es/table';
+import { Popconfirm } from 'antd';
 import API from 'services/api/userApi';
 import toggleUserBlock from 'services/api/toggleUserBlock';
 import getUserList from 'services/api/userlistApi';
@@ -98,7 +99,7 @@ const UsersPage: FC = () => {
     toggleUserBlock(id, token.token);
   };
 
-  const deleteUser = (id: number): void => {
+  const handleDelete = (id: number) => {
     const findUser = users.filter((user: User) => user.user_id !== id);
     setUsers(findUser);
     deleteById(id, token.token);
@@ -131,7 +132,7 @@ const UsersPage: FC = () => {
     render: (record) => (
       <>
         {userRole === SUPER_ADMIN_ROLE
-          ? <StyledActionButton type="text" size="middle" color={record.is_blocked} onClick={() => deleteUser(record.user_id)}>Delete</StyledActionButton>
+          ? <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.user_id)}><ActionButton type="text" size="middle" style={record.is_blocked ? { color: 'grey' } : { color: 'black' }}>Delete</ActionButton></Popconfirm>
           : <StyledActionButton type="text" size="middle" color={record.is_blocked} onClick={() => toggleBlock(record.is_blocked, record.user_id)}>{record.is_blocked ? 'Block' : 'Unblock'}</StyledActionButton>}
       </>
     ),
