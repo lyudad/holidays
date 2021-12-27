@@ -132,7 +132,7 @@ const UsersPage: FC = () => {
     render: (record) => (
       <>
         {userRole === SUPER_ADMIN_ROLE
-          ? <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.user_id)}><ActionButton type="text" size="middle" style={record.is_blocked ? { color: 'grey' } : { color: 'black' }}>Delete</ActionButton></Popconfirm>
+          ? <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.user_id)}><StyledActionButton type="text" size="middle" color={record.is_blocked}>Delete</StyledActionButton></Popconfirm>
           : <StyledActionButton type="text" size="middle" color={record.is_blocked} onClick={() => toggleBlock(record.is_blocked, record.user_id)}>{record.is_blocked ? 'Block' : 'Unblock'}</StyledActionButton>}
       </>
     ),
